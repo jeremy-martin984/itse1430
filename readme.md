@@ -1,5 +1,5 @@
 # ITSE 1430 - Programming in C#
-
+This is a change!
 This repository is where your classwork and lab assignments will go.
 
 ## Prerequisites
