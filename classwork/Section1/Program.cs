@@ -14,7 +14,6 @@ namespace Section1
             //PlayingWithVariables();                       
             AddMovie();
         }
-
         static void AddMovie ()
         {
             string title = ReadString("Enter a title: ", true);
@@ -29,71 +28,89 @@ namespace Section1
         private static bool ReadBoolean ( string message )
         {
             Console.Write(message + " (Y/N)");
-            string value = Console.ReadLine();
+            do
+            {
+                //Check for empty string
+                //if value != String.Empty another option
+                // if(value.Length == 0)
+                // if(!String.IsNullOrEmpty(value)) preferred
+               string value = Console.ReadLine();
+               // string value = Console.ReadKey(true);
 
-            //TODO: Do this correctly?
-            char firstChar = value[0];
-            return firstChar == 'Y';
+                //if (value !="")
+                if (!String.IsNullOrEmpty(value))
+                    {
+                    //TODO: Do this correctly?
+                    if (String.Compare(value, "Y", true) == 0)
+                        return true;
+                    else if (String.Compare(value, "N", true) == 0)
+                        return false;
+                    
+
+                    char firstChar = value[0];
+
+                    //value = value.ToLower();
+                    //if (value == "y")
+                    //    return true;
+                    //else if (value == "n")
+                    //    return false;
+                    //switch (firstChar)
+                    //{
+                    //  //  case 'A': Console.WriteLine("A"); break;
+                    //  //  case 'a': Console.WriteLine("a"); break;
+                    //    case 'Y': return true;
+                    //    case 'y': return true;
+                    //    case 'n': return false;
+                    //    case 'N': return false;
+
+                    //};
+                    //if (firstChar == 'Y' || firstChar == 'y')
+                    //    return true;
+                    //else if (firstChar == 'N' || firstChar == 'n')
+                    //    return false;
+                };
+                Console.WriteLine("Enter Y/N");
+            } while (true);
+
         }
 
         private static string ReadString ( string message, bool required )
         {
             Console.Write(message);
-            string value = Console.ReadLine();
+            do
+            {
+                string value = Console.ReadLine();
 
-            //TODO: Validate
-            return value;
+                if (!String.IsNullOrEmpty(value) || !required)
+                    return value;
+
+                if (required)
+                    Console.WriteLine("Value is required");
+
+                return value;
+            } while (true);
         }
 
         private static int ReadInt32 ( string message, int minValue, int maxValue )
         {
-            Console.Write(message);
-
-            string temp = Console.ReadLine();
-            //int value = Int32.Parse(temp);
-
-            //TODO: Clean this up
-            int value;
-            if (Int32.TryParse(temp, out value))
-                return value;
-
-            //TODO: Validate input
-            return -1;
-        }
-
-        private static void PlayingWithVariables ()
-        {
-            Console.WriteLine("Hello World!");
-
-            int hours;
-            double payRate;
-
+            do
             {
-                string name;
-                bool pass;
-            }
+                Console.Write(message);
 
-            {
-                int name = 10;
-            }
+                string temp = Console.ReadLine();
+                //int value = Int32.Parse(temp);
 
-            //Not cased properly
-            //string FirstName;
+                //TODO: Clean this up
+                //int value;
+                if (Int32.TryParse(temp, out var value))
+                {
+                    if (value >= minValue && value <= maxValue)
+                        return value;
+                };
 
-            //hours = 10;
-            //int newHours = hours;
+                Console.WriteLine("Value must be between minValue and maxValue");
+            } while (true);
 
-            //Logical block 1     
-            int hours2 = 10;
-            //int hours3;
-            //hours3 = 3;
-
-            int x, y, z;
-            int a = 10, b = 20, c = 30;
-
-            //Display a message
-            Console.WriteLine("Enter a value");
-            string input = Console.ReadLine();
         }
     }
 }
