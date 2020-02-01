@@ -59,9 +59,6 @@ namespace PizzaCreator
                 Console.WriteLine("Q to Quit");
                 Console.WriteLine("\n\nOrder Total: " + price.ToString("C"));
 
-
-                //TODO: readkey
-                //var input = Console.ReadLine();
                 var input = Console.ReadKey(true);
                 switch (input.Key)
                 {
@@ -87,7 +84,12 @@ namespace PizzaCreator
                         return MenuOptions.Quit;
                     }
 
-                    default: Console.WriteLine("Invalid option"); break;
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                    }
                 };
             } while (true);
         }
@@ -104,6 +106,13 @@ namespace PizzaCreator
                 {
                     case ConsoleKey.Y: return true;
                     case ConsoleKey.N: return false;
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        Console.Write(message + " (Y/N)");
+                        break;
+                    }
                 };
             } while (true);
         }
@@ -141,7 +150,12 @@ namespace PizzaCreator
                         Console.Clear();
                         return "Large\n";
                     }
-                    default: Console.WriteLine("Invalid option"); break;
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                    }
                 }
 
             } while (true);
@@ -246,6 +260,12 @@ namespace PizzaCreator
                         meatsPrice = boolCounter * 0.75;
                         return pizzaMeats;
                     }
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                    }
                 }
             } while (true);
         }
@@ -345,6 +365,12 @@ namespace PizzaCreator
                         Console.Clear();
                         return pizzaVeggies;
                     }
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                    }
                 }
             } while (true);
         }
@@ -364,14 +390,14 @@ namespace PizzaCreator
                 {
                     case ConsoleKey.D1:
                     {
-                        sauce += "Traditional";
+                        sauce += "Traditional\n";
                         Console.Clear();
                         saucePrice = 0;
                         return sauce;
                     }
                     case ConsoleKey.D2:
                     {
-                        sauce += "Garlic";
+                        sauce += "Garlic\n";
                         saucePrice = 1;
                         price += 1;
                         Console.Clear();
@@ -379,13 +405,18 @@ namespace PizzaCreator
                     }
                     case ConsoleKey.D3:
                     {
-                        sauce += "Oregano";
+                        sauce += "Oregano\n";
                         saucePrice = 1;
                         price += 1;
                         Console.Clear();
                         return sauce;
                     }
-                    default: Console.WriteLine("Invalid selection!");break;
+                    default:
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                    }
                 }
             } while (true);
         }
@@ -430,11 +461,7 @@ namespace PizzaCreator
                 pizzaSauce = PizzaSauce();
                 extraCheese = ExtraCheese();
                 delivery = Delivery();
-
-                pizzaOrder = pizzaSize + pizzaMeats + pizzaVeggies + pizzaSauce + extraCheese + delivery + "\n\nPrice Total: " + price.ToString("C");
-
-
-                //pizzaOrder = PizzaSize() + PizzaMeats() + PizzaVeggies() + PizzaSauce() + ExtraCheese() + Delivery() + "\n\n Price Total: " + price.ToString("C");
+                UpdateOrderTotal();
                 Console.WriteLine(pizzaOrder + "\n\n");
                 Console.WriteLine("Push Any key to continue.");
                 Console.ReadKey();
@@ -466,13 +493,14 @@ namespace PizzaCreator
             Console.WriteLine(pizzaOrder);
             Console.WriteLine("Push any key to continue");
             Console.ReadKey();
+            Console.Clear();
             return;
         }
         static void ChangePizza ()
         {
             if(price == 0)
             {
-                Console.WriteLine("No order yet!");
+                Console.WriteLine("No order created yet");
                 return;
             }
             do
