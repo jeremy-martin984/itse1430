@@ -126,7 +126,7 @@ namespace PizzaCreator
                 Console.WriteLine("2. Medium   ($6.25)");
                 Console.WriteLine("3. Large    ($8.75)");
                 var input = Console.ReadKey(true);
-
+                string size = "Size\n" + "".PadLeft(20, '-') + "\n";
                 switch (input.Key)
                 {
                     case ConsoleKey.D1:
@@ -134,21 +134,24 @@ namespace PizzaCreator
                         price += 5;
                         sizePrice = 5;
                         Console.Clear();
-                        return "Small\n";
+                        size += "Small Pizza" + "\n" + sizePrice.ToString("C").PadLeft(25) + "\n\n";
+                        return size;
                     }
                     case ConsoleKey.D2:
                     {
                         price += 6.25;
                         sizePrice = 6.25;
                         Console.Clear();
-                        return "Medium\n";
+                        size += "Medium Pizza" + "\n" + sizePrice.ToString("C").PadLeft(25) + "\n\n";
+                        return size;
                     }
                     case ConsoleKey.D3:
                     {
                         price += 8.75;
                         sizePrice = 8.75;
                         Console.Clear();
-                        return "Large\n";
+                        size += "Large Pizza" + "\n" + sizePrice.ToString("C").PadLeft(25) + "\n\n";
+                        return size;
                     }
                     default:
                     {
@@ -247,18 +250,18 @@ namespace PizzaCreator
                     case ConsoleKey.Enter:
                     {
                         price += boolCounter * 0.75;
-                        string pizzaMeats = "Meats\n".PadRight(20, '-') + "\n";
+                        string pizzaMeats = "Meats\n".PadRight(25, '-') + "\n";
                         if (bacon == true)
-                            pizzaMeats +="Bacon\n";
+                            pizzaMeats +="Bacon" + 0.75.ToString("C").PadLeft(20) + "\n";
                         if (ham == true)
-                            pizzaMeats +="Ham\n";
+                            pizzaMeats +="Ham" + 0.75.ToString("C").PadLeft(22) + "\n";
                         if (pepperoni == true)
-                            pizzaMeats += "Pepperoni\n";
+                            pizzaMeats += "Pepperoni" + 0.75.ToString("C").PadLeft(16) + "\n";
                         if (sausage == true)
-                            pizzaMeats += "Sausage\n";
+                            pizzaMeats += "Sausage" + 0.75.ToString("C").PadLeft(18) + "\n";
                         Console.Clear();
                         meatsPrice = boolCounter * 0.75;
-                        return pizzaMeats;
+                        return pizzaMeats + "\nSubtotal:" + meatsPrice.ToString("C").PadLeft(16) + "\n\n";
                     }
                     default:
                     {
@@ -353,17 +356,17 @@ namespace PizzaCreator
                     {
                         price += boolCounter * 0.50;
                         veggiesPrice = boolCounter * 0.50;
-                        string pizzaVeggies = "\nVeggies\n".PadRight(20, '-') + "\n";
+                        string pizzaVeggies = "\nVeggies\n".PadRight(25, '-') + "\n";
                         if (blackOlives == true)
-                            pizzaVeggies +="Black Olives\n";
+                            pizzaVeggies +="Black Olives" + 0.50.ToString("C").PadLeft(13) + "\n";
                         if (mushrooms == true)
-                            pizzaVeggies +="Mushrooms\n";
+                            pizzaVeggies +="Mushrooms" + 0.50.ToString("C").PadLeft(16) + "\n";
                         if (onions == true)
-                            pizzaVeggies += "Onions\n";
+                            pizzaVeggies += "Onions" + 0.50.ToString("C").PadLeft(19) + "\n";
                         if (peppers == true)
-                            pizzaVeggies += "peppers\n";
+                            pizzaVeggies += "peppers"  + 0.50.ToString("C").PadLeft(18) + "\n";
                         Console.Clear();
-                        return pizzaVeggies;
+                        return pizzaVeggies + "\nSubtotal:" + veggiesPrice.ToString("C").PadLeft(16) + "\n\n";
                     }
                     default:
                     {
@@ -376,7 +379,7 @@ namespace PizzaCreator
         }
         public static string PizzaSauce ()
         {
-            string sauce = "\nSauce:\n".PadRight(20, '-') + "\n";
+            string sauce = "Sauce:\n".PadRight(25, '-') + "\n";
             do
             {
                 Console.WriteLine("Select from the choices below for your sauce");
@@ -390,14 +393,14 @@ namespace PizzaCreator
                 {
                     case ConsoleKey.D1:
                     {
-                        sauce += "Traditional\n";
+                        sauce += "Traditional" + 0.00.ToString("C").PadLeft(14) + "\n\n";
                         Console.Clear();
                         saucePrice = 0;
                         return sauce;
                     }
                     case ConsoleKey.D2:
                     {
-                        sauce += "Garlic\n";
+                        sauce += "Garlic"  + 1.00.ToString("C").PadLeft(19) + "\n\n";
                         saucePrice = 1;
                         price += 1;
                         Console.Clear();
@@ -405,7 +408,7 @@ namespace PizzaCreator
                     }
                     case ConsoleKey.D3:
                     {
-                        sauce += "Oregano\n";
+                        sauce += "Oregano"  + 1.00.ToString("C").PadLeft(18) + "\n\n";
                         saucePrice = 1;
                         price += 1;
                         Console.Clear();
@@ -427,12 +430,12 @@ namespace PizzaCreator
                 price += 1.25;
                 cheesePrice = 1.25;
                 Console.Clear();
-                return "\nExtra Cheese\n";
+                return "\nExtra Cheese"  + 1.25.ToString("C").PadLeft(13) + "\n";
             } else
             {
                 Console.Clear();
                 cheesePrice = 0;
-                return "\nRegular Cheese\n";
+                return "\nRegular Cheese"  + 0.00.ToString("C").PadLeft(11) + "\n"; ;
             }
         }
         private static string Delivery ()
@@ -442,12 +445,12 @@ namespace PizzaCreator
                 price += 2.50;
                 deliveryFee=2.50;
                 Console.Clear();
-                return "\nFor Delivery\nRemember, delivery fee is not a tip.";
+                return "\nFor Delivery"  + 2.50.ToString("C").PadLeft(13) + "\n" + "\nRemember, delivery fee is not a tip.";
             } else
             {
                 deliveryFee = 0;
                 Console.Clear();
-                return "\nFor Pickup\n";
+                return "\nFor Pickup"  + 0.00.ToString("C").PadLeft(15) + "\n";
             }
         }
 
@@ -479,7 +482,7 @@ namespace PizzaCreator
         }
         public static void UpdateOrderTotal()
         {
-            pizzaOrder = pizzaSize + pizzaMeats + pizzaVeggies + pizzaSauce + extraCheese + delivery + "\n\nPrice Total: " + price.ToString("C");
+            pizzaOrder = pizzaSize + pizzaMeats + pizzaVeggies + pizzaSauce + extraCheese + delivery + "\n\nPrice Total: " + price.ToString("C") + "\t";
             return;
         }
         private static void ViewPizza ()
