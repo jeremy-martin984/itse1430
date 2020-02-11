@@ -9,7 +9,12 @@ namespace MovieLibrary.Business
     public class Movie
     {
         /// <summary>Gets or sets the title.</summary>
-        public string title;
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+        private string _title;
 
         /// <summary>Gets or sets the run length in minutes.</summary>
         public int runLength;

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using MovieLibrary.Business;
+using MovieLibrary.Winforms;
 
 namespace MovieLibrary
 {
@@ -17,14 +18,14 @@ namespace MovieLibrary
             //MovieLibrary.Business.Movie;
             var movie = new Movie();
                         
-            movie.title = "Jaws";
-            movie.description = movie.title;
+            movie.Title = "Jaws";
+            movie.description = movie.Title;
 
             movie = new Movie();
 
             //DisplayMovie(movie);
             //DisplayMovie(null);
-            DisplayConfirmation("Are you sure?", "Start");
+            //DisplayConfirmation("Are you sure?", "Start");
             #endregion
         }
 
@@ -63,11 +64,28 @@ namespace MovieLibrary
             if (movie == null)
                 return;
             
-            var title = movie.title;
+            var title = movie.Title;
             movie.description = "Test";
 
             movie = new Movie();
         }
         #endregion
+
+        private void OnMovieAdd ( object sender, EventArgs e )
+        {
+            //modal window = showDialog()
+            //modeless = Show()
+            MovieForm child = new MovieForm();
+            child.ShowDialog(this);
+            //child.Show();
+            if (child.ShowDialog(this) != DialogResult.OK)
+                return;
+
+        }
+
+        private void ExitToolStripMenuItem_Click ( object sender, EventArgs e )
+        {
+            Close();
+        }
     }
 }
