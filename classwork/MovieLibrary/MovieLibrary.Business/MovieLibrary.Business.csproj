@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3767ADA2-4EF9-4427-B897-927B96FCAFF9}</ProjectGuid>
+    <ProjectGuid>{F1A36463-BB35-41B3-81B4-8283166C6ACA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MovieLibrary.Business</RootNamespace>
