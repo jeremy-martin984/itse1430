@@ -18,8 +18,8 @@ namespace MovieLibrary
             //MovieLibrary.Business.Movie;
             var movie = new Movie();
                         
-            movie.Title = "Jaws";
-            movie.description = movie.Title;
+           // movie.Title = "Jaws";
+           // movie.description = movie.Title;
 
             movie = new Movie();
 
@@ -65,27 +65,49 @@ namespace MovieLibrary
                 return;
             
             var title = movie.Title;
-            movie.description = "Test";
+         //   movie.description = "Test";
 
-            movie = new Movie();
+           // movie = new Movie();
         }
         #endregion
 
         private void OnMovieAdd ( object sender, EventArgs e )
         {
-            //modal window = showDialog()
-            //modeless = Show()
             MovieForm child = new MovieForm();
-            child.ShowDialog(this);
-            //child.Show();
+
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
+            //TODO: Save the movie
+            _movie = child.Movie;
+            //child.Show();
         }
 
-        private void ExitToolStripMenuItem_Click ( object sender, EventArgs e )
+        private Movie _movie;
+
+        private void OnFileExit ( object sender, EventArgs e )
         {
             Close();
+        }
+
+        private void OnMovieDelete ( object sender, EventArgs e )
+        {
+            //verify movie
+            if (_movie == null)
+                return;
+
+            if (DisplayConfirmation($"Are you sure want to delete {_movie.Title}?", "Delete"))
+                return;
+
+            //TODO: Delete
+            _movie = null;
+        }
+
+        private void OnHelpAbout ( object sender, EventArgs e )
+        {
+            var about = new AboutBox();
+
+            about.ShowDialog(this);
         }
     }
 }
