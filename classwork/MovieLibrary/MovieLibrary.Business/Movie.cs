@@ -60,7 +60,7 @@ namespace MovieLibrary.Business
         {
             get { return ReleaseYear <= 1930; }
         }
-        public int Id { get; }
+       // public int Id { get; }
         public int Id
         {
             get { return _id; }
