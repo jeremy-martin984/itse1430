@@ -44,19 +44,24 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.comboBoxClass = new System.Windows.Forms.ComboBox();
             this.comboBoxText = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.txtPointsRemaining = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.saveCharacter = new System.Windows.Forms.SaveFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            this.btnPlusStr = new System.Windows.Forms.Button();
+            this.btnMinStr = new System.Windows.Forms.Button();
+            this.txtStr = new System.Windows.Forms.TextBox();
+            this.txtInt = new System.Windows.Forms.TextBox();
+            this.txtAgi = new System.Windows.Forms.TextBox();
+            this.txtCon = new System.Windows.Forms.TextBox();
+            this.txtCha = new System.Windows.Forms.TextBox();
+            this.btnPlusInt = new System.Windows.Forms.Button();
+            this.btnPlusAgi = new System.Windows.Forms.Button();
+            this.btnPlusCon = new System.Windows.Forms.Button();
+            this.btnPlusCha = new System.Windows.Forms.Button();
+            this.btnMinInt = new System.Windows.Forms.Button();
+            this.btnMinAgi = new System.Windows.Forms.Button();
+            this.btnMinCon = new System.Windows.Forms.Button();
+            this.btnMinCha = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtName
@@ -223,66 +228,6 @@
             this.comboBoxText.Sorted = true;
             this.comboBoxText.TabIndex = 17;
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(721, 188);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 31);
-            this.numericUpDown1.TabIndex = 18;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(721, 246);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 31);
-            this.numericUpDown2.TabIndex = 19;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(721, 304);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(120, 31);
-            this.numericUpDown3.TabIndex = 20;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(721, 364);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 31);
-            this.numericUpDown4.TabIndex = 21;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(721, 418);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(120, 31);
-            this.numericUpDown5.TabIndex = 22;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
             // txtPointsRemaining
             // 
             this.txtPointsRemaining.Location = new System.Drawing.Point(595, 540);
@@ -290,6 +235,7 @@
             this.txtPointsRemaining.ReadOnly = true;
             this.txtPointsRemaining.Size = new System.Drawing.Size(78, 31);
             this.txtPointsRemaining.TabIndex = 23;
+            this.txtPointsRemaining.Text = "50";
             // 
             // lblName
             // 
@@ -306,6 +252,142 @@
             this.saveCharacter.Filter = "Character Creator File|*.ccs|All Files|*.*";
             this.saveCharacter.InitialDirectory = "C:\\Character Creator";
             // 
+            // btnPlusStr
+            // 
+            this.btnPlusStr.Location = new System.Drawing.Point(816, 189);
+            this.btnPlusStr.Name = "btnPlusStr";
+            this.btnPlusStr.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusStr.TabIndex = 25;
+            this.btnPlusStr.Text = "+";
+            this.btnPlusStr.UseVisualStyleBackColor = true;
+            this.btnPlusStr.Click += new System.EventHandler(this.PlusStr);
+            // 
+            // btnMinStr
+            // 
+            this.btnMinStr.Location = new System.Drawing.Point(864, 189);
+            this.btnMinStr.Name = "btnMinStr";
+            this.btnMinStr.Size = new System.Drawing.Size(42, 35);
+            this.btnMinStr.TabIndex = 26;
+            this.btnMinStr.Text = "-";
+            this.btnMinStr.UseVisualStyleBackColor = true;
+            // 
+            // txtStr
+            // 
+            this.txtStr.Location = new System.Drawing.Point(738, 193);
+            this.txtStr.Name = "txtStr";
+            this.txtStr.ReadOnly = true;
+            this.txtStr.Size = new System.Drawing.Size(50, 31);
+            this.txtStr.TabIndex = 27;
+            this.txtStr.Text = "50";
+            // 
+            // txtInt
+            // 
+            this.txtInt.Location = new System.Drawing.Point(738, 246);
+            this.txtInt.Name = "txtInt";
+            this.txtInt.ReadOnly = true;
+            this.txtInt.Size = new System.Drawing.Size(50, 31);
+            this.txtInt.TabIndex = 28;
+            this.txtInt.Text = "50";
+            // 
+            // txtAgi
+            // 
+            this.txtAgi.Location = new System.Drawing.Point(738, 304);
+            this.txtAgi.Name = "txtAgi";
+            this.txtAgi.ReadOnly = true;
+            this.txtAgi.Size = new System.Drawing.Size(50, 31);
+            this.txtAgi.TabIndex = 29;
+            this.txtAgi.Text = "50";
+            // 
+            // txtCon
+            // 
+            this.txtCon.Location = new System.Drawing.Point(738, 364);
+            this.txtCon.Name = "txtCon";
+            this.txtCon.ReadOnly = true;
+            this.txtCon.Size = new System.Drawing.Size(50, 31);
+            this.txtCon.TabIndex = 30;
+            this.txtCon.Text = "50";
+            // 
+            // txtCha
+            // 
+            this.txtCha.Location = new System.Drawing.Point(738, 418);
+            this.txtCha.Name = "txtCha";
+            this.txtCha.ReadOnly = true;
+            this.txtCha.Size = new System.Drawing.Size(50, 31);
+            this.txtCha.TabIndex = 31;
+            this.txtCha.Text = "50";
+            // 
+            // btnPlusInt
+            // 
+            this.btnPlusInt.Location = new System.Drawing.Point(816, 242);
+            this.btnPlusInt.Name = "btnPlusInt";
+            this.btnPlusInt.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusInt.TabIndex = 32;
+            this.btnPlusInt.Text = "+";
+            this.btnPlusInt.UseVisualStyleBackColor = true;
+            // 
+            // btnPlusAgi
+            // 
+            this.btnPlusAgi.Location = new System.Drawing.Point(816, 300);
+            this.btnPlusAgi.Name = "btnPlusAgi";
+            this.btnPlusAgi.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusAgi.TabIndex = 33;
+            this.btnPlusAgi.Text = "+";
+            this.btnPlusAgi.UseVisualStyleBackColor = true;
+            // 
+            // btnPlusCon
+            // 
+            this.btnPlusCon.Location = new System.Drawing.Point(816, 360);
+            this.btnPlusCon.Name = "btnPlusCon";
+            this.btnPlusCon.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusCon.TabIndex = 34;
+            this.btnPlusCon.Text = "+";
+            this.btnPlusCon.UseVisualStyleBackColor = true;
+            // 
+            // btnPlusCha
+            // 
+            this.btnPlusCha.Location = new System.Drawing.Point(816, 414);
+            this.btnPlusCha.Name = "btnPlusCha";
+            this.btnPlusCha.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusCha.TabIndex = 35;
+            this.btnPlusCha.Text = "+";
+            this.btnPlusCha.UseVisualStyleBackColor = true;
+            // 
+            // btnMinInt
+            // 
+            this.btnMinInt.Location = new System.Drawing.Point(864, 242);
+            this.btnMinInt.Name = "btnMinInt";
+            this.btnMinInt.Size = new System.Drawing.Size(42, 35);
+            this.btnMinInt.TabIndex = 36;
+            this.btnMinInt.Text = "-";
+            this.btnMinInt.UseVisualStyleBackColor = true;
+            // 
+            // btnMinAgi
+            // 
+            this.btnMinAgi.Location = new System.Drawing.Point(864, 300);
+            this.btnMinAgi.Name = "btnMinAgi";
+            this.btnMinAgi.Size = new System.Drawing.Size(42, 35);
+            this.btnMinAgi.TabIndex = 37;
+            this.btnMinAgi.Text = "-";
+            this.btnMinAgi.UseVisualStyleBackColor = true;
+            // 
+            // btnMinCon
+            // 
+            this.btnMinCon.Location = new System.Drawing.Point(864, 360);
+            this.btnMinCon.Name = "btnMinCon";
+            this.btnMinCon.Size = new System.Drawing.Size(42, 35);
+            this.btnMinCon.TabIndex = 38;
+            this.btnMinCon.Text = "-";
+            this.btnMinCon.UseVisualStyleBackColor = true;
+            // 
+            // btnMinCha
+            // 
+            this.btnMinCha.Location = new System.Drawing.Point(864, 414);
+            this.btnMinCha.Name = "btnMinCha";
+            this.btnMinCha.Size = new System.Drawing.Size(42, 35);
+            this.btnMinCha.TabIndex = 39;
+            this.btnMinCha.Text = "-";
+            this.btnMinCha.UseVisualStyleBackColor = true;
+            // 
             // CharacterCreator
             // 
             this.AcceptButton = this.button1;
@@ -313,13 +395,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(946, 720);
+            this.Controls.Add(this.btnMinCha);
+            this.Controls.Add(this.btnMinCon);
+            this.Controls.Add(this.btnMinAgi);
+            this.Controls.Add(this.btnMinInt);
+            this.Controls.Add(this.btnPlusCha);
+            this.Controls.Add(this.btnPlusCon);
+            this.Controls.Add(this.btnPlusAgi);
+            this.Controls.Add(this.btnPlusInt);
+            this.Controls.Add(this.txtCha);
+            this.Controls.Add(this.txtCon);
+            this.Controls.Add(this.txtAgi);
+            this.Controls.Add(this.txtInt);
+            this.Controls.Add(this.txtStr);
+            this.Controls.Add(this.btnMinStr);
+            this.Controls.Add(this.btnPlusStr);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtPointsRemaining);
-            this.Controls.Add(this.numericUpDown5);
-            this.Controls.Add(this.numericUpDown4);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.comboBoxText);
             this.Controls.Add(this.comboBoxClass);
             this.Controls.Add(this.richTextBox1);
@@ -341,11 +433,6 @@
             this.Name = "CharacterCreator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Character";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,13 +455,23 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBoxClass;
         private System.Windows.Forms.ComboBox comboBoxText;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.TextBox txtPointsRemaining;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.SaveFileDialog saveCharacter;
+        private System.Windows.Forms.Button btnPlusStr;
+        private System.Windows.Forms.Button btnMinStr;
+        private System.Windows.Forms.TextBox txtStr;
+        private System.Windows.Forms.TextBox txtInt;
+        private System.Windows.Forms.TextBox txtAgi;
+        private System.Windows.Forms.TextBox txtCon;
+        private System.Windows.Forms.TextBox txtCha;
+        private System.Windows.Forms.Button btnPlusInt;
+        private System.Windows.Forms.Button btnPlusAgi;
+        private System.Windows.Forms.Button btnPlusCon;
+        private System.Windows.Forms.Button btnPlusCha;
+        private System.Windows.Forms.Button btnMinInt;
+        private System.Windows.Forms.Button btnMinAgi;
+        private System.Windows.Forms.Button btnMinCon;
+        private System.Windows.Forms.Button btnMinCha;
     }
 }
