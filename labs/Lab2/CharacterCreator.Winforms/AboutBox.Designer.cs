@@ -1,4 +1,4 @@
-﻿namespace MovieLibrary.Winforms
+﻿namespace CharacterCreator.Winforms
 {
     partial class AboutBox
     {
@@ -88,7 +88,7 @@
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(541, 33);
             this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Product Name";
+            this.labelProductName.Text = "Character Creator";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelVersion
