@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CharacterCreator;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace CharacterCreator.Winforms
 {
     public partial class CharacterCreatorForm : Form
     {
+        private Character _character = new Character();
         public CharacterCreatorForm ()
         {
             InitializeComponent();
@@ -49,7 +53,7 @@ namespace CharacterCreator.Winforms
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
-
+            _character = newToon;
             saveCharacter.FileName = txtName.Text;
             saveCharacter.ShowDialog();
         }
@@ -187,6 +191,11 @@ namespace CharacterCreator.Winforms
         private void CharacterCreator_Load ( object sender, EventArgs e )
         {
 
+        }
+
+        private void OnSaveOk ( object sender, CancelEventArgs e )
+        {
+            //TODO:Save the character.
         }
     }
 }

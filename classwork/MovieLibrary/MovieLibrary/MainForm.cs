@@ -100,7 +100,7 @@ namespace MovieLibrary
             _movie = child.Movie;
         }
 
-        //private MovieClass _movie;
+        private MovieClass _movie;
 
         private void OnFileExit ( object sender, EventArgs e )
         {

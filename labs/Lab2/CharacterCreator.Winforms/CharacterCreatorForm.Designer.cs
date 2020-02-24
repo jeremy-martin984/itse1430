@@ -251,6 +251,7 @@
             this.saveCharacter.DefaultExt = "ccs";
             this.saveCharacter.Filter = "Character Creator File|*.ccs|All Files|*.*";
             this.saveCharacter.InitialDirectory = "C:\\Character Creator";
+            this.saveCharacter.FileOk += new System.ComponentModel.CancelEventHandler(this.OnSaveOk);
             // 
             // btnPlusStr
             // 
