@@ -9,6 +9,58 @@ namespace CharacterCreator
     /// <summary>
     /// Represents all info for a character
     /// </summary>
+
+        public class StatHandler
+    {
+        /// <summary>
+        /// Controls adding or subtracting stat points from the character screen
+        /// </summary>
+        /// <param name="pointsRemaining"></param>
+        /// <param name="statIncrease"></param>
+        /// <param name="newPointsRemaining"></param>
+        /// <param name="newStatTotal"></param>
+        public void PlusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
+        {
+            var temp = Int32.Parse(pointsRemaining);
+            if (temp == 0)
+            {
+                newPointsRemaining = null;
+                newStatTotal = null;
+                return;
+            } 
+
+            else
+            {
+                temp -= 1;
+                newPointsRemaining = temp.ToString();
+                temp = Int32.Parse(statIncrease);
+                temp += 1;
+                newStatTotal = temp.ToString();
+                return;
+            }
+        }
+
+        public void MinusStat (string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
+        {
+            var temp = Int32.Parse(statIncrease);
+            if (temp == 50)
+            {
+                newPointsRemaining = null;
+                newStatTotal = null;
+                return;
+            }
+
+            else
+            {
+                temp -= 1;
+                newStatTotal = temp.ToString();
+                temp = Int32.Parse(pointsRemaining);
+                temp += 1;
+                newPointsRemaining = temp.ToString();
+                return;
+            }
+        }
+
     public class Character
     {
         /// <summary>
@@ -65,6 +117,7 @@ namespace CharacterCreator
         public string Description
         { get; set; }
 
-        
+
+        }
     }
 }

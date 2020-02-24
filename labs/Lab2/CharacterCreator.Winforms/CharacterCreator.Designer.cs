@@ -270,6 +270,7 @@
             this.btnMinStr.TabIndex = 26;
             this.btnMinStr.Text = "-";
             this.btnMinStr.UseVisualStyleBackColor = true;
+            this.btnMinStr.Click += new System.EventHandler(this.MinusStr);
             // 
             // txtStr
             // 
@@ -324,6 +325,7 @@
             this.btnPlusInt.TabIndex = 32;
             this.btnPlusInt.Text = "+";
             this.btnPlusInt.UseVisualStyleBackColor = true;
+            this.btnPlusInt.Click += new System.EventHandler(this.PlusInt);
             // 
             // btnPlusAgi
             // 
@@ -333,6 +335,7 @@
             this.btnPlusAgi.TabIndex = 33;
             this.btnPlusAgi.Text = "+";
             this.btnPlusAgi.UseVisualStyleBackColor = true;
+            this.btnPlusAgi.Click += new System.EventHandler(this.PlusAgi);
             // 
             // btnPlusCon
             // 
@@ -342,6 +345,7 @@
             this.btnPlusCon.TabIndex = 34;
             this.btnPlusCon.Text = "+";
             this.btnPlusCon.UseVisualStyleBackColor = true;
+            this.btnPlusCon.Click += new System.EventHandler(this.PlusCon);
             // 
             // btnPlusCha
             // 
@@ -351,6 +355,7 @@
             this.btnPlusCha.TabIndex = 35;
             this.btnPlusCha.Text = "+";
             this.btnPlusCha.UseVisualStyleBackColor = true;
+            this.btnPlusCha.Click += new System.EventHandler(this.PlusCha);
             // 
             // btnMinInt
             // 
@@ -360,6 +365,7 @@
             this.btnMinInt.TabIndex = 36;
             this.btnMinInt.Text = "-";
             this.btnMinInt.UseVisualStyleBackColor = true;
+            this.btnMinInt.Click += new System.EventHandler(this.MinusInt);
             // 
             // btnMinAgi
             // 
@@ -369,6 +375,7 @@
             this.btnMinAgi.TabIndex = 37;
             this.btnMinAgi.Text = "-";
             this.btnMinAgi.UseVisualStyleBackColor = true;
+            this.btnMinAgi.Click += new System.EventHandler(this.MinusAgi);
             // 
             // btnMinCon
             // 
@@ -378,6 +385,7 @@
             this.btnMinCon.TabIndex = 38;
             this.btnMinCon.Text = "-";
             this.btnMinCon.UseVisualStyleBackColor = true;
+            this.btnMinCon.Click += new System.EventHandler(this.MinusCon);
             // 
             // btnMinCha
             // 
@@ -387,6 +395,7 @@
             this.btnMinCha.TabIndex = 39;
             this.btnMinCha.Text = "-";
             this.btnMinCha.UseVisualStyleBackColor = true;
+            this.btnMinCha.Click += new System.EventHandler(this.MinusCha);
             // 
             // CharacterCreator
             // 
@@ -433,6 +442,7 @@
             this.Name = "CharacterCreator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Character";
+            this.Load += new System.EventHandler(this.CharacterCreator_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
