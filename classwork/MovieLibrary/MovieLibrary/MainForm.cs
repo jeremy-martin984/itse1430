@@ -16,12 +16,12 @@ namespace MovieLibrary
 
             //Full name
             //MovieLibrary.Business.Movie;
-            var movie = new Movie();
+            var movie = new MovieClass();
                         
            // movie.Title = "Jaws";
            // movie.description = movie.Title;
 
-            movie = new Movie();
+            movie = new MovieClass();
 
             //DisplayMovie(movie);
             //DisplayMovie(null);
@@ -59,7 +59,7 @@ namespace MovieLibrary
 
         #region Playing with methods
 
-        void DisplayMovie ( Movie movie )
+        void DisplayMovie ( MovieClass movie )
         {
             if (movie == null)
                 return;
@@ -100,7 +100,7 @@ namespace MovieLibrary
             _movie = child.Movie;
         }
 
-        private Movie _movie;
+        //private MovieClass _movie;
 
         private void OnFileExit ( object sender, EventArgs e )
         {

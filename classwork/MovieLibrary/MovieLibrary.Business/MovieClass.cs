@@ -6,7 +6,7 @@ namespace MovieLibrary.Business
     /// <remarks>
     /// Lots of info.
     /// </remarks>
-    public class Movie
+    public class MovieClass
     {
         public Genre Genre { get; set; }
         /// <summary>Gets or sets the title.</summary>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CharacterCreator;
 
 namespace CharacterCreator.Winforms
 {
@@ -16,7 +17,6 @@ namespace CharacterCreator.Winforms
         {
             InitializeComponent();
         }
-
         private void OnExit ( object sender, EventArgs e )
         {
             Close();
@@ -29,10 +29,11 @@ namespace CharacterCreator.Winforms
             about.ShowDialog(this);
         }
 
+        //private CharacterCreator _newToon = new CharacterCreator();
 
         private void OnNew ( object sender, EventArgs e )
         {
-            var newCharacter = new CharacterCreator();
+            var newCharacter = new CharacterCreatorForm();
             newCharacter.Show();
         }
     }

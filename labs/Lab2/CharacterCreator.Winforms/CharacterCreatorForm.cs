@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CharacterCreator;
 
 namespace CharacterCreator.Winforms
 {
-    public partial class CharacterCreator : Form
+    public partial class CharacterCreatorForm : Form
     {
-        public CharacterCreator ()
+        public CharacterCreatorForm ()
         {
             InitializeComponent();
+        }
+
+        private int GetAsInt32 ( string txtBox )
+        {
+            int temp = Int32.Parse(txtBox);
+            return temp;
         }
 
         private void OnCancel ( object sender, EventArgs e )
@@ -25,6 +32,24 @@ namespace CharacterCreator.Winforms
 
         private void OnSave ( object sender, EventArgs e )
         {
+            var newToon = new Character();
+            newToon.Agility = GetAsInt32(txtAgi.Text);
+            newToon.Charisma = GetAsInt32(txtCha.Text);
+            newToon.Constitution = GetAsInt32(txtCon.Text);
+            newToon.Strength = GetAsInt32(txtStr.Text);
+            newToon.Intelligence = GetAsInt32(txtInt.Text);
+            newToon.Name = txtName.Text;
+            newToon.Race = comboBoxRace.Text;
+            newToon.Class = comboBoxClass.Text;
+            newToon.Description = richTextBio.Text;
+            int pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
+
+            if(!newToon.ErrorCheck(pointsRemaining, out string error))
+            {
+                MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
+                return;
+            }
+
             saveCharacter.FileName = txtName.Text;
             saveCharacter.ShowDialog();
         }

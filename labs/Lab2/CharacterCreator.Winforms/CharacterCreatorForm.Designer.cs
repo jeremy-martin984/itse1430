@@ -1,6 +1,6 @@
 ﻿namespace CharacterCreator.Winforms
 {
-    partial class CharacterCreator
+    partial class CharacterCreatorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,9 +41,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBio = new System.Windows.Forms.RichTextBox();
             this.comboBoxClass = new System.Windows.Forms.ComboBox();
-            this.comboBoxText = new System.Windows.Forms.ComboBox();
+            this.comboBoxRace = new System.Windows.Forms.ComboBox();
             this.txtPointsRemaining = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.saveCharacter = new System.Windows.Forms.SaveFileDialog();
@@ -182,13 +182,13 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Character Description:";
             // 
-            // richTextBox1
+            // richTextBio
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(79, 370);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(478, 201);
-            this.richTextBox1.TabIndex = 15;
-            this.richTextBox1.Text = "Enter Character biography here.";
+            this.richTextBio.Location = new System.Drawing.Point(79, 370);
+            this.richTextBio.Name = "richTextBio";
+            this.richTextBio.Size = new System.Drawing.Size(478, 201);
+            this.richTextBio.TabIndex = 15;
+            this.richTextBio.Text = "Enter Character biography here.";
             // 
             // comboBoxClass
             // 
@@ -210,11 +210,11 @@
             this.comboBoxClass.Sorted = true;
             this.comboBoxClass.TabIndex = 16;
             // 
-            // comboBoxText
+            // comboBoxRace
             // 
-            this.comboBoxText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxText.FormattingEnabled = true;
-            this.comboBoxText.Items.AddRange(new object[] {
+            this.comboBoxRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRace.FormattingEnabled = true;
+            this.comboBoxRace.Items.AddRange(new object[] {
             "Dark Elf",
             "Dwarf",
             "High Elf",
@@ -222,11 +222,11 @@
             "Karen",
             "LizardMan",
             "Orc"});
-            this.comboBoxText.Location = new System.Drawing.Point(175, 252);
-            this.comboBoxText.Name = "comboBoxText";
-            this.comboBoxText.Size = new System.Drawing.Size(198, 33);
-            this.comboBoxText.Sorted = true;
-            this.comboBoxText.TabIndex = 17;
+            this.comboBoxRace.Location = new System.Drawing.Point(175, 252);
+            this.comboBoxRace.Name = "comboBoxRace";
+            this.comboBoxRace.Size = new System.Drawing.Size(198, 33);
+            this.comboBoxRace.Sorted = true;
+            this.comboBoxRace.TabIndex = 17;
             // 
             // txtPointsRemaining
             // 
@@ -397,7 +397,7 @@
             this.btnMinCha.UseVisualStyleBackColor = true;
             this.btnMinCha.Click += new System.EventHandler(this.MinusCha);
             // 
-            // CharacterCreator
+            // CharacterCreatorForm
             // 
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -421,9 +421,9 @@
             this.Controls.Add(this.btnPlusStr);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtPointsRemaining);
-            this.Controls.Add(this.comboBoxText);
+            this.Controls.Add(this.comboBoxRace);
             this.Controls.Add(this.comboBoxClass);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.richTextBio);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
@@ -439,7 +439,8 @@
             this.Controls.Add(this.txtName);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CharacterCreator";
+            this.Name = "CharacterCreatorForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Character";
             this.Load += new System.EventHandler(this.CharacterCreator_Load);
@@ -462,9 +463,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBio;
         private System.Windows.Forms.ComboBox comboBoxClass;
-        private System.Windows.Forms.ComboBox comboBoxText;
+        private System.Windows.Forms.ComboBox comboBoxRace;
         private System.Windows.Forms.TextBox txtPointsRemaining;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.SaveFileDialog saveCharacter;

@@ -18,7 +18,7 @@ namespace MovieLibrary.Winforms
             InitializeComponent();
         }
 
-        public MovieForm( Movie movie) : this(movie != null ? "Edit" : "Add", movie)
+        public MovieForm( MovieClass movie) : this(movie != null ? "Edit" : "Add", movie)
         {
             //InitializeComponent();
             //Movie = movie;
@@ -26,17 +26,17 @@ namespace MovieLibrary.Winforms
             //Text = movie != null ? "Edit" : "Add";
         }
 
-        public MovieForm ( string title, Movie movie ) : this()
+        public MovieForm ( string title, MovieClass movie ) : this()
         {
             Text = title;
             Movie = movie;
         }
-        public Movie Movie
+        public MovieClass Movie
         {
             get { return _movie; }
             set { _movie = value; }
         }
-        private Movie _movie;
+        private MovieClass _movie;
 
         private void OnCancel ( object sender, EventArgs e )
         {
@@ -79,9 +79,9 @@ namespace MovieLibrary.Winforms
             };
         }
 
-        private Movie GetMovie ()
+        private MovieClass GetMovie ()
         {
-            var movie = new Movie();
+            var movie = new MovieClass();
 
             //Null conditional, not required below
             //No string property will ever return null
