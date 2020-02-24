@@ -55,7 +55,13 @@ namespace CharacterCreator.Winforms
             }
             _character = newToon;
             saveCharacter.FileName = txtName.Text;
-            saveCharacter.ShowDialog();
+            System.Xml.Serialization.XmlSerializer writer = 
+                new System.Xml.Serialization.XmlSerializer(typeof(Character));
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".xml";// "//SerializationOverview.xml"; 
+            System.IO.FileStream file = System.IO.File.Create(path);
+            writer.Serialize(file, newToon);
+            file.Close();
+            Close();
         }
 
         private void PlusStr ( object sender, EventArgs e )
