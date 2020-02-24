@@ -188,14 +188,11 @@ namespace CharacterCreator.Winforms
             }
         }
 
-        private void CharacterCreator_Load ( object sender, EventArgs e )
-        {
-
-        }
 
         private void OnSaveOk ( object sender, CancelEventArgs e )
         {
-            //TODO:Save the character.
+            //TODO:Actually save the character.
+
         }
     }
 }

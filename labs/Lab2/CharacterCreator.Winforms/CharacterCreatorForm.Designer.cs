@@ -29,7 +29,7 @@
         private void InitializeComponent ()
         {
             this.txtName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblPoints = new System.Windows.Forms.Label();
             this.lblClass = new System.Windows.Forms.Label();
@@ -66,27 +66,30 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(175, 132);
+            this.txtName.Location = new System.Drawing.Point(88, 69);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(198, 31);
+            this.txtName.Size = new System.Drawing.Size(101, 20);
             this.txtName.TabIndex = 1;
             // 
-            // button1
+            // btnSave
             // 
-            this.button1.Location = new System.Drawing.Point(576, 640);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 45);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "&Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.OnSave);
+            this.btnSave.Location = new System.Drawing.Point(288, 333);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(56, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "&Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.OnSave);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(728, 640);
+            this.btnCancel.Location = new System.Drawing.Point(364, 333);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(113, 45);
+            this.btnCancel.Size = new System.Drawing.Size(56, 23);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -95,98 +98,109 @@
             // lblPoints
             // 
             this.lblPoints.AutoSize = true;
-            this.lblPoints.Location = new System.Drawing.Point(590, 498);
+            this.lblPoints.Location = new System.Drawing.Point(295, 259);
+            this.lblPoints.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPoints.Name = "lblPoints";
-            this.lblPoints.Size = new System.Drawing.Size(180, 25);
+            this.lblPoints.Size = new System.Drawing.Size(89, 13);
             this.lblPoints.TabIndex = 4;
             this.lblPoints.Text = "Remaining Points";
             // 
             // lblClass
             // 
             this.lblClass.AutoSize = true;
-            this.lblClass.Location = new System.Drawing.Point(74, 194);
+            this.lblClass.Location = new System.Drawing.Point(37, 101);
+            this.lblClass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClass.Name = "lblClass";
-            this.lblClass.Size = new System.Drawing.Size(72, 25);
+            this.lblClass.Size = new System.Drawing.Size(35, 13);
             this.lblClass.TabIndex = 5;
             this.lblClass.Text = "Class:";
             // 
             // lblRace
             // 
             this.lblRace.AutoSize = true;
-            this.lblRace.Location = new System.Drawing.Point(74, 252);
+            this.lblRace.Location = new System.Drawing.Point(37, 131);
+            this.lblRace.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRace.Name = "lblRace";
-            this.lblRace.Size = new System.Drawing.Size(68, 25);
+            this.lblRace.Size = new System.Drawing.Size(36, 13);
             this.lblRace.TabIndex = 6;
             this.lblRace.Text = "Race:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(590, 138);
+            this.label4.Location = new System.Drawing.Point(295, 72);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(209, 25);
+            this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Character Attributes:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(590, 194);
+            this.label5.Location = new System.Drawing.Point(295, 101);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 25);
+            this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Strength:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(590, 252);
+            this.label1.Location = new System.Drawing.Point(295, 131);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 25);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Intelligence:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(590, 370);
+            this.label2.Location = new System.Drawing.Point(295, 192);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 25);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Constitution:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(590, 310);
+            this.label3.Location = new System.Drawing.Point(295, 161);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 25);
+            this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Agility:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(590, 424);
+            this.label6.Location = new System.Drawing.Point(295, 220);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 25);
+            this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "Charisma:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(74, 310);
+            this.label7.Location = new System.Drawing.Point(37, 161);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(226, 25);
+            this.label7.Size = new System.Drawing.Size(112, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "Character Description:";
             // 
             // richTextBio
             // 
-            this.richTextBio.Location = new System.Drawing.Point(79, 370);
+            this.richTextBio.Location = new System.Drawing.Point(40, 192);
+            this.richTextBio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.richTextBio.Name = "richTextBio";
-            this.richTextBio.Size = new System.Drawing.Size(478, 201);
+            this.richTextBio.Size = new System.Drawing.Size(241, 106);
             this.richTextBio.TabIndex = 15;
             this.richTextBio.Text = "Enter Character biography here.";
             // 
@@ -204,9 +218,10 @@
             "Warrior",
             "White Mage",
             "Wizard"});
-            this.comboBoxClass.Location = new System.Drawing.Point(175, 186);
+            this.comboBoxClass.Location = new System.Drawing.Point(88, 97);
+            this.comboBoxClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxClass.Name = "comboBoxClass";
-            this.comboBoxClass.Size = new System.Drawing.Size(198, 33);
+            this.comboBoxClass.Size = new System.Drawing.Size(101, 21);
             this.comboBoxClass.Sorted = true;
             this.comboBoxClass.TabIndex = 16;
             // 
@@ -222,27 +237,30 @@
             "Karen",
             "LizardMan",
             "Orc"});
-            this.comboBoxRace.Location = new System.Drawing.Point(175, 252);
+            this.comboBoxRace.Location = new System.Drawing.Point(88, 131);
+            this.comboBoxRace.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxRace.Name = "comboBoxRace";
-            this.comboBoxRace.Size = new System.Drawing.Size(198, 33);
+            this.comboBoxRace.Size = new System.Drawing.Size(101, 21);
             this.comboBoxRace.Sorted = true;
             this.comboBoxRace.TabIndex = 17;
             // 
             // txtPointsRemaining
             // 
-            this.txtPointsRemaining.Location = new System.Drawing.Point(595, 540);
+            this.txtPointsRemaining.Location = new System.Drawing.Point(298, 281);
+            this.txtPointsRemaining.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPointsRemaining.Name = "txtPointsRemaining";
             this.txtPointsRemaining.ReadOnly = true;
-            this.txtPointsRemaining.Size = new System.Drawing.Size(78, 31);
+            this.txtPointsRemaining.Size = new System.Drawing.Size(41, 20);
             this.txtPointsRemaining.TabIndex = 23;
             this.txtPointsRemaining.Text = "50";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(74, 138);
+            this.lblName.Location = new System.Drawing.Point(37, 72);
+            this.lblName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(74, 25);
+            this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 24;
             this.lblName.Text = "Name:";
             // 
@@ -255,9 +273,10 @@
             // 
             // btnPlusStr
             // 
-            this.btnPlusStr.Location = new System.Drawing.Point(816, 189);
+            this.btnPlusStr.Location = new System.Drawing.Point(408, 98);
+            this.btnPlusStr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPlusStr.Name = "btnPlusStr";
-            this.btnPlusStr.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusStr.Size = new System.Drawing.Size(21, 18);
             this.btnPlusStr.TabIndex = 25;
             this.btnPlusStr.Text = "+";
             this.btnPlusStr.UseVisualStyleBackColor = true;
@@ -265,9 +284,10 @@
             // 
             // btnMinStr
             // 
-            this.btnMinStr.Location = new System.Drawing.Point(864, 189);
+            this.btnMinStr.Location = new System.Drawing.Point(432, 98);
+            this.btnMinStr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinStr.Name = "btnMinStr";
-            this.btnMinStr.Size = new System.Drawing.Size(42, 35);
+            this.btnMinStr.Size = new System.Drawing.Size(21, 18);
             this.btnMinStr.TabIndex = 26;
             this.btnMinStr.Text = "-";
             this.btnMinStr.UseVisualStyleBackColor = true;
@@ -275,54 +295,60 @@
             // 
             // txtStr
             // 
-            this.txtStr.Location = new System.Drawing.Point(738, 193);
+            this.txtStr.Location = new System.Drawing.Point(369, 100);
+            this.txtStr.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtStr.Name = "txtStr";
             this.txtStr.ReadOnly = true;
-            this.txtStr.Size = new System.Drawing.Size(50, 31);
+            this.txtStr.Size = new System.Drawing.Size(27, 20);
             this.txtStr.TabIndex = 27;
             this.txtStr.Text = "50";
             // 
             // txtInt
             // 
-            this.txtInt.Location = new System.Drawing.Point(738, 246);
+            this.txtInt.Location = new System.Drawing.Point(369, 128);
+            this.txtInt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtInt.Name = "txtInt";
             this.txtInt.ReadOnly = true;
-            this.txtInt.Size = new System.Drawing.Size(50, 31);
+            this.txtInt.Size = new System.Drawing.Size(27, 20);
             this.txtInt.TabIndex = 28;
             this.txtInt.Text = "50";
             // 
             // txtAgi
             // 
-            this.txtAgi.Location = new System.Drawing.Point(738, 304);
+            this.txtAgi.Location = new System.Drawing.Point(369, 158);
+            this.txtAgi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAgi.Name = "txtAgi";
             this.txtAgi.ReadOnly = true;
-            this.txtAgi.Size = new System.Drawing.Size(50, 31);
+            this.txtAgi.Size = new System.Drawing.Size(27, 20);
             this.txtAgi.TabIndex = 29;
             this.txtAgi.Text = "50";
             // 
             // txtCon
             // 
-            this.txtCon.Location = new System.Drawing.Point(738, 364);
+            this.txtCon.Location = new System.Drawing.Point(369, 189);
+            this.txtCon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCon.Name = "txtCon";
             this.txtCon.ReadOnly = true;
-            this.txtCon.Size = new System.Drawing.Size(50, 31);
+            this.txtCon.Size = new System.Drawing.Size(27, 20);
             this.txtCon.TabIndex = 30;
             this.txtCon.Text = "50";
             // 
             // txtCha
             // 
-            this.txtCha.Location = new System.Drawing.Point(738, 418);
+            this.txtCha.Location = new System.Drawing.Point(369, 217);
+            this.txtCha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCha.Name = "txtCha";
             this.txtCha.ReadOnly = true;
-            this.txtCha.Size = new System.Drawing.Size(50, 31);
+            this.txtCha.Size = new System.Drawing.Size(27, 20);
             this.txtCha.TabIndex = 31;
             this.txtCha.Text = "50";
             // 
             // btnPlusInt
             // 
-            this.btnPlusInt.Location = new System.Drawing.Point(816, 242);
+            this.btnPlusInt.Location = new System.Drawing.Point(408, 126);
+            this.btnPlusInt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPlusInt.Name = "btnPlusInt";
-            this.btnPlusInt.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusInt.Size = new System.Drawing.Size(21, 18);
             this.btnPlusInt.TabIndex = 32;
             this.btnPlusInt.Text = "+";
             this.btnPlusInt.UseVisualStyleBackColor = true;
@@ -330,9 +356,10 @@
             // 
             // btnPlusAgi
             // 
-            this.btnPlusAgi.Location = new System.Drawing.Point(816, 300);
+            this.btnPlusAgi.Location = new System.Drawing.Point(408, 156);
+            this.btnPlusAgi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPlusAgi.Name = "btnPlusAgi";
-            this.btnPlusAgi.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusAgi.Size = new System.Drawing.Size(21, 18);
             this.btnPlusAgi.TabIndex = 33;
             this.btnPlusAgi.Text = "+";
             this.btnPlusAgi.UseVisualStyleBackColor = true;
@@ -340,9 +367,10 @@
             // 
             // btnPlusCon
             // 
-            this.btnPlusCon.Location = new System.Drawing.Point(816, 360);
+            this.btnPlusCon.Location = new System.Drawing.Point(408, 187);
+            this.btnPlusCon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPlusCon.Name = "btnPlusCon";
-            this.btnPlusCon.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusCon.Size = new System.Drawing.Size(21, 18);
             this.btnPlusCon.TabIndex = 34;
             this.btnPlusCon.Text = "+";
             this.btnPlusCon.UseVisualStyleBackColor = true;
@@ -350,9 +378,10 @@
             // 
             // btnPlusCha
             // 
-            this.btnPlusCha.Location = new System.Drawing.Point(816, 414);
+            this.btnPlusCha.Location = new System.Drawing.Point(408, 215);
+            this.btnPlusCha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPlusCha.Name = "btnPlusCha";
-            this.btnPlusCha.Size = new System.Drawing.Size(42, 35);
+            this.btnPlusCha.Size = new System.Drawing.Size(21, 18);
             this.btnPlusCha.TabIndex = 35;
             this.btnPlusCha.Text = "+";
             this.btnPlusCha.UseVisualStyleBackColor = true;
@@ -360,9 +389,10 @@
             // 
             // btnMinInt
             // 
-            this.btnMinInt.Location = new System.Drawing.Point(864, 242);
+            this.btnMinInt.Location = new System.Drawing.Point(432, 126);
+            this.btnMinInt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinInt.Name = "btnMinInt";
-            this.btnMinInt.Size = new System.Drawing.Size(42, 35);
+            this.btnMinInt.Size = new System.Drawing.Size(21, 18);
             this.btnMinInt.TabIndex = 36;
             this.btnMinInt.Text = "-";
             this.btnMinInt.UseVisualStyleBackColor = true;
@@ -370,9 +400,10 @@
             // 
             // btnMinAgi
             // 
-            this.btnMinAgi.Location = new System.Drawing.Point(864, 300);
+            this.btnMinAgi.Location = new System.Drawing.Point(432, 156);
+            this.btnMinAgi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinAgi.Name = "btnMinAgi";
-            this.btnMinAgi.Size = new System.Drawing.Size(42, 35);
+            this.btnMinAgi.Size = new System.Drawing.Size(21, 18);
             this.btnMinAgi.TabIndex = 37;
             this.btnMinAgi.Text = "-";
             this.btnMinAgi.UseVisualStyleBackColor = true;
@@ -380,9 +411,10 @@
             // 
             // btnMinCon
             // 
-            this.btnMinCon.Location = new System.Drawing.Point(864, 360);
+            this.btnMinCon.Location = new System.Drawing.Point(432, 187);
+            this.btnMinCon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinCon.Name = "btnMinCon";
-            this.btnMinCon.Size = new System.Drawing.Size(42, 35);
+            this.btnMinCon.Size = new System.Drawing.Size(21, 18);
             this.btnMinCon.TabIndex = 38;
             this.btnMinCon.Text = "-";
             this.btnMinCon.UseVisualStyleBackColor = true;
@@ -390,9 +422,10 @@
             // 
             // btnMinCha
             // 
-            this.btnMinCha.Location = new System.Drawing.Point(864, 414);
+            this.btnMinCha.Location = new System.Drawing.Point(432, 215);
+            this.btnMinCha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinCha.Name = "btnMinCha";
-            this.btnMinCha.Size = new System.Drawing.Size(42, 35);
+            this.btnMinCha.Size = new System.Drawing.Size(21, 18);
             this.btnMinCha.TabIndex = 39;
             this.btnMinCha.Text = "-";
             this.btnMinCha.UseVisualStyleBackColor = true;
@@ -400,11 +433,11 @@
             // 
             // CharacterCreatorForm
             // 
-            this.AcceptButton = this.button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AcceptButton = this.btnSave;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(946, 720);
+            this.ClientSize = new System.Drawing.Size(473, 374);
             this.Controls.Add(this.btnMinCha);
             this.Controls.Add(this.btnMinCon);
             this.Controls.Add(this.btnMinAgi);
@@ -436,15 +469,15 @@
             this.Controls.Add(this.lblClass);
             this.Controls.Add(this.lblPoints);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CharacterCreatorForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Character";
-            this.Load += new System.EventHandler(this.CharacterCreator_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,7 +485,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblPoints;
         private System.Windows.Forms.Label lblClass;
