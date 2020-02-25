@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CharacterCreator;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace CharacterCreator.Winforms
 {
@@ -53,10 +52,9 @@ namespace CharacterCreator.Winforms
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
-            System.Xml.Serialization.XmlSerializer writer = 
-                new System.Xml.Serialization.XmlSerializer(typeof(Character));
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".xml";// "//SerializationOverview.xml"; 
-            System.IO.FileStream file = System.IO.File.Create(path);
+            var writer = new XmlSerializer(typeof(Character));
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".ccs";
+            var file = File.Create(path);
             writer.Serialize(file, newToon);
             file.Close();
             Close();
