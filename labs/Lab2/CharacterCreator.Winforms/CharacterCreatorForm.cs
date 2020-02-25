@@ -15,11 +15,14 @@ namespace CharacterCreator.Winforms
 {
     public partial class CharacterCreatorForm : Form
     {
+        
         public CharacterCreatorForm ()
         {
             InitializeComponent();
         }
 
+        public Character Toon
+        { get; set; }
         private int GetAsInt32 ( string txtBox )
         {
             int temp = Int32.Parse(txtBox);
@@ -45,6 +48,7 @@ namespace CharacterCreator.Winforms
                 Class = comboBoxClass.Text,
                 Description = richTextBio.Text
             };
+
             int pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
 
             if(!newToon.ErrorCheck(pointsRemaining, out string error))
@@ -52,8 +56,10 @@ namespace CharacterCreator.Winforms
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
+            //TODO: Better input validationchar[] charsToTrim = { ':', '*', '?', '<', '>', '\'', '/' };
+            string fileName = txtName.Text;
             var writer = new XmlSerializer(typeof(Character));
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".ccs";
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + fileName + ".ccs";
             var file = File.Create(path);
             writer.Serialize(file, newToon);
             file.Close();
@@ -190,11 +196,22 @@ namespace CharacterCreator.Winforms
             }
         }
 
-
-        private void OnSaveOk ( object sender, CancelEventArgs e )
+        protected override void OnLoad ( EventArgs e )
         {
-            //TODO:Actually save the character.
-
+            base.OnLoad(e);
+            if (Toon != null)
+            {
+                //TODO:Delete old name if name changed
+                txtName.Text = Toon.Name.ToString();
+                txtAgi.Text = Toon.Agility.ToString();
+                txtCha.Text = Toon.Charisma.ToString();
+                txtCon.Text = Toon.Constitution.ToString();
+                txtInt.Text = Toon.Intelligence.ToString();
+                txtPointsRemaining.Text = "0";
+                txtStr.Text = Toon.Strength.ToString();
+                comboBoxClass.Text = Toon.Class.ToString();
+                comboBoxRace.Text = Toon.Race.ToString();
+            }
         }
     }
 }
