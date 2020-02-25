@@ -15,7 +15,7 @@ namespace CharacterCreator.Winforms
 {
     public partial class CharacterCreatorForm : Form
     {
-        
+
         public CharacterCreatorForm ()
         {
             InitializeComponent();
@@ -25,14 +25,14 @@ namespace CharacterCreator.Winforms
         { get; set; }
         private int GetAsInt32 ( string txtBox )
         {
-            int temp = Int32.Parse(txtBox);
+            var temp = Int32.Parse(txtBox);
             return temp;
         }
 
         private void OnCancel ( object sender, EventArgs e )
         {
             Close();
-            
+
         }
 
         private void OnSave ( object sender, EventArgs e )
@@ -49,17 +49,16 @@ namespace CharacterCreator.Winforms
                 Description = richTextBio.Text
             };
 
-            int pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
+            var pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
 
-            if(!newToon.ErrorCheck(pointsRemaining, out string error))
+            if (!newToon.ErrorCheck(pointsRemaining, out var error))
             {
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
-            //TODO: Better input validationchar[] charsToTrim = { ':', '*', '?', '<', '>', '\'', '/' };
-            string fileName = txtName.Text;
+            //TODO: Better input validation
             var writer = new XmlSerializer(typeof(Character));
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + fileName + ".ccs";
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".ccs";
             var file = File.Create(path);
             writer.Serialize(file, newToon);
             file.Close();
@@ -69,7 +68,7 @@ namespace CharacterCreator.Winforms
         private void PlusStr ( object sender, EventArgs e )
         {
             var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtStr.Text, out string temp, out string temp2);
+            plus.PlusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -82,7 +81,7 @@ namespace CharacterCreator.Winforms
         private void MinusStr ( object sender, EventArgs e )
         {
             var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtStr.Text, out string temp, out string temp2);
+            minus.MinusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -95,7 +94,7 @@ namespace CharacterCreator.Winforms
         private void PlusInt ( object sender, EventArgs e )
         {
             var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtInt.Text, out string temp, out string temp2);
+            plus.PlusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -108,7 +107,7 @@ namespace CharacterCreator.Winforms
         private void PlusAgi ( object sender, EventArgs e )
         {
             var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtAgi.Text, out string temp, out string temp2);
+            plus.PlusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -121,7 +120,7 @@ namespace CharacterCreator.Winforms
         private void PlusCon ( object sender, EventArgs e )
         {
             var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtCon.Text, out string temp, out string temp2);
+            plus.PlusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -134,7 +133,7 @@ namespace CharacterCreator.Winforms
         private void PlusCha ( object sender, EventArgs e )
         {
             var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtCha.Text, out string temp, out string temp2);
+            plus.PlusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -147,7 +146,7 @@ namespace CharacterCreator.Winforms
         private void MinusInt ( object sender, EventArgs e )
         {
             var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtInt.Text, out string temp, out string temp2);
+            minus.MinusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -160,7 +159,7 @@ namespace CharacterCreator.Winforms
         private void MinusAgi ( object sender, EventArgs e )
         {
             var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtAgi.Text, out string temp, out string temp2);
+            minus.MinusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -173,7 +172,7 @@ namespace CharacterCreator.Winforms
         private void MinusCon ( object sender, EventArgs e )
         {
             var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtCon.Text, out string temp, out string temp2);
+            minus.MinusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -183,10 +182,11 @@ namespace CharacterCreator.Winforms
             }
         }
 
+
         private void MinusCha ( object sender, EventArgs e )
         {
             var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtCha.Text, out string temp, out string temp2);
+            minus.MinusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else

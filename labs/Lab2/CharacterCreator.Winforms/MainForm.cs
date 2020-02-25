@@ -41,7 +41,7 @@ namespace CharacterCreator.Winforms
 
         private void EditCharacter(object sender, EventArgs e)
         {
-            var fileName = "";
+            string fileName;
             if (CharacterOpenForm.ShowDialog() == DialogResult.OK)
             {
                 fileName = CharacterOpenForm.FileName;
@@ -66,7 +66,7 @@ namespace CharacterCreator.Winforms
 
         private void DeleteCharacter(object sender, EventArgs e)
         {
-            var fileName = "";
+            string fileName;
             if (CharacterOpenForm.ShowDialog() == DialogResult.OK)
             {
                 fileName = CharacterOpenForm.FileName;

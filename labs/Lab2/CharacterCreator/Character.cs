@@ -67,6 +67,12 @@ namespace CharacterCreator
         public string Description
         { get; set; }
 
+        /// <summary>
+        /// takes remaining points on character string and validates all other fields for valid input
+        /// </summary>
+        /// <param name="pointsRemaining"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
         public bool ErrorCheck ( int pointsRemaining, out string error )
         {
             if (pointsRemaining != 0)
@@ -77,6 +83,15 @@ namespace CharacterCreator
             if (String.IsNullOrEmpty(Name))
             {
                 error = "A name is required.";
+                return false;
+            }
+
+            
+            char[] charsToTrim = { ':', '*', '?', '<', '>', '\\', '/' };
+            var temp = Name.Trim(charsToTrim);
+            if (temp != Name)
+            {
+                error = @"The characters :, *, ?, <, >, \ and / Are not allowed.";
                 return false;
             }
 
@@ -100,15 +115,12 @@ namespace CharacterCreator
             }
         }
     }
+
+    /// <summary>
+    /// Takes two strings from text field, parses as ints, and returns new values (as strings) when appropriate.
+    /// </summary>
     public class StatHandler
     {
-        /// <summary>
-        /// Controls adding or subtracting stat points from the character screen
-        /// </summary>
-        /// <param name="pointsRemaining"></param>
-        /// <param name="statIncrease"></param>
-        /// <param name="newPointsRemaining"></param>
-        /// <param name="newStatTotal"></param>
         public void PlusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
         {
             var temp = Int32.Parse(pointsRemaining);
