@@ -39,16 +39,15 @@ namespace CharacterCreator.Winforms
 
         private void EditCharacter(object sender, EventArgs e)
         {
-            openCharacterDialog.ShowDialog();
-            var editCharacter = new CharacterCreatorForm();
-            editCharacter.Text = "Edit Character";
+            var editCharacter = new CharacterCreatorForm {
+                Text = "Edit Character"
+            };
             //todo:load in character
             editCharacter.Show();
         }
 
         private void DeleteCharacter(object sender, EventArgs e)
         {
-            openCharacterDialog.ShowDialog();
         }
     }
 }

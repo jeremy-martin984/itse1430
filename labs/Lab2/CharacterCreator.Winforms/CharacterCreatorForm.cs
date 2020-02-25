@@ -16,7 +16,6 @@ namespace CharacterCreator.Winforms
 {
     public partial class CharacterCreatorForm : Form
     {
-        private Character _character = new Character();
         public CharacterCreatorForm ()
         {
             InitializeComponent();
@@ -36,16 +35,17 @@ namespace CharacterCreator.Winforms
 
         private void OnSave ( object sender, EventArgs e )
         {
-            var newToon = new Character();
-            newToon.Agility = GetAsInt32(txtAgi.Text);
-            newToon.Charisma = GetAsInt32(txtCha.Text);
-            newToon.Constitution = GetAsInt32(txtCon.Text);
-            newToon.Strength = GetAsInt32(txtStr.Text);
-            newToon.Intelligence = GetAsInt32(txtInt.Text);
-            newToon.Name = txtName.Text;
-            newToon.Race = comboBoxRace.Text;
-            newToon.Class = comboBoxClass.Text;
-            newToon.Description = richTextBio.Text;
+            var newToon = new Character {
+                Agility = GetAsInt32(txtAgi.Text),
+                Charisma = GetAsInt32(txtCha.Text),
+                Constitution = GetAsInt32(txtCon.Text),
+                Strength = GetAsInt32(txtStr.Text),
+                Intelligence = GetAsInt32(txtInt.Text),
+                Name = txtName.Text,
+                Race = comboBoxRace.Text,
+                Class = comboBoxClass.Text,
+                Description = richTextBio.Text
+            };
             int pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
 
             if(!newToon.ErrorCheck(pointsRemaining, out string error))
@@ -53,8 +53,6 @@ namespace CharacterCreator.Winforms
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
-            _character = newToon;
-            saveCharacter.FileName = txtName.Text;
             System.Xml.Serialization.XmlSerializer writer = 
                 new System.Xml.Serialization.XmlSerializer(typeof(Character));
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".xml";// "//SerializationOverview.xml"; 
