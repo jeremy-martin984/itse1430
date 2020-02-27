@@ -6,19 +6,29 @@ namespace MovieLibrary.Business
     /// <remarks>
     /// Lots of info.
     /// </remarks>
-    public class MovieClass
+    public class Movie
     {
         public Genre Genre { get; set; }
+
         /// <summary>Gets or sets the title.</summary>
         public string Title
         {
+            //Never return null from a string property, always return empty string
             get {
-                //if (_title ==null)
+                //Long, long way
+                //if (_title == null)
                 //    return "";
+
                 //return _title;
+
+                //Long way
                 //return (_title != null) ? _title : "";
+
+                //Correct - use null coalesce operator
                 return _title ?? "";
             }
+
+            //Use null conditional operator if instance value can be null
             set { _title = value?.Trim(); }
         }
         private string _title;
@@ -31,9 +41,8 @@ namespace MovieLibrary.Business
         //}
         //private int _runLength;
         public int RunLength { get; set; }
-        public int ReleaseYear { get; set; } = 1900;
 
-        public bool IsClassic { get; set; }
+        /// <summary>Gets or sets the description.</summary>
         public string Description
         {
             get { return _description ?? ""; }
@@ -48,27 +57,40 @@ namespace MovieLibrary.Business
         //    get { return _releaseYear; }
         //    set { _releaseYear = value; }
         //}
-        //    private int _releaseYear = 1900;
+        //private int _releaseYear = 1900;
+        //Can use auto property with default value for underlying field
+        public int ReleaseYear { get; set; } = 1900;
+
         /// <summary>Determines if this is a classic movie.</summary>
-        /// 
         //public bool IsClassic
         //{
         //    get { return _isClassic; }
         //    set { _isClassic = value; }
         //}
-        //    private bool _isClassic;
+        //private bool _isClassic;
+        public bool IsClassic { get; set; }
+
+        //Calculated property, no setter
         public bool IsBlackAndWhite
         {
             get { return ReleaseYear <= 1930; }
         }
-       // public int Id { get; }
-        public int Id
+
+        //public int Id
+        //{
+        //    get { return _id; }
+        //    private set { _id = value; }
+        //}
+        //private int _id;
+        //Public getter, private setter using auto property syntax
+        public int Id { get; }
+
+        public override string ToString ()
         {
-            get { return _id; }
-            private set { _id = value; }
+            return Title;
         }
-        private int _id;
-        public bool Validate( out string error)
+
+        public bool Validate ( out string error )
         {
             //Title is required
             //if (txtTitle.Text?.Trim() == "")
@@ -77,10 +99,11 @@ namespace MovieLibrary.Business
                 error = "Title is required.";
                 return false;
             };
+
             //Run length >= 0
             if (RunLength < 0)
             {
-                error= "Run length must be >= 0.";
+                error = "Run length must be >= 0.";
                 return false;
             };
 

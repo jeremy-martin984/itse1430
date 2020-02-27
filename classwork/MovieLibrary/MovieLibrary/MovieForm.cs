@@ -18,7 +18,7 @@ namespace MovieLibrary.Winforms
             InitializeComponent();
         }
 
-        public MovieForm( MovieClass movie) : this(movie != null ? "Edit" : "Add", movie)
+        public MovieForm( Movie movie) : this(movie != null ? "Edit" : "Add", movie)
         {
             //InitializeComponent();
             //Movie = movie;
@@ -26,17 +26,17 @@ namespace MovieLibrary.Winforms
             //Text = movie != null ? "Edit" : "Add";
         }
 
-        public MovieForm ( string title, MovieClass movie ) : this()
+        public MovieForm ( string title, Movie movie ) : this()
         {
             Text = title;
             Movie = movie;
         }
-        public MovieClass Movie
+        public Movie Movie
         {
             get { return _movie; }
             set { _movie = value; }
         }
-        private MovieClass _movie;
+        private Movie _movie;
 
         private void OnCancel ( object sender, EventArgs e )
         {
@@ -46,13 +46,15 @@ namespace MovieLibrary.Winforms
 
         private void OnOK ( object sender, EventArgs e )
         {
+            if (!ValidateChildren())
+                return;
             //TODO: Validation and error reporting
             var movie = GetMovie();
-            if (!movie.Validate(out var error))
-            {
-                DisplayError(error);
-                return;
-            }
+            //if (!movie.Validate(out var error))
+            //{
+            //    DisplayError(error);
+            //    return;
+            //}
 
             Movie = movie;
             DialogResult = DialogResult.OK;
@@ -76,12 +78,14 @@ namespace MovieLibrary.Winforms
 
                 if (Movie.Genre != null)
                     ddlGenres.SelectedText = Movie.Genre.Description;
+
+                ValidateChildren();
             };
         }
 
-        private MovieClass GetMovie ()
+        private Movie GetMovie ()
         {
-            var movie = new MovieClass();
+            var movie = new Movie();
 
             //Null conditional, not required below
             //No string property will ever return null
@@ -158,6 +162,42 @@ namespace MovieLibrary.Winforms
             return -1;
         }
 
-        
+        private void OnValidateTitle ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                //DisplayError("Title is required");
+                _errors.SetError(control, "Title is required");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateRunLength ( object sender, CancelEventArgs e )
+        {
+            var control = sender as Control;
+            var value = GetAsInt32(control, 0);
+            if (value < 0)
+            {
+                //DisplayError("Run length must be >= 0.");
+                _errors.SetError(control, "Run length must be >= 0");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateReleaseYear ( object sender, CancelEventArgs e )
+        {
+            var control = sender as Control;
+            var value = GetAsInt32(control, 0);
+            if (value < 1900)
+            {
+                //DisplayError("Release Year must be >= 1900");
+                _errors.SetError(control, "Release Year must be >= 1900");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
     }
 }

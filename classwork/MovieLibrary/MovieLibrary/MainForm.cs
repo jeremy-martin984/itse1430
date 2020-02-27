@@ -8,6 +8,8 @@ namespace MovieLibrary
 {
     public partial class MainForm : Form
     {
+        #region Construction
+
         public MainForm ()
         {
             InitializeComponent();
@@ -16,18 +18,19 @@ namespace MovieLibrary
 
             //Full name
             //MovieLibrary.Business.Movie;
-            var movie = new MovieClass();
-                        
-           // movie.Title = "Jaws";
-           // movie.description = movie.Title;
+            //var movie = new Movie();
 
-            movie = new MovieClass();
+            //movie.title = "Jaws";
+            //movie.description = movie.title;
+
+            //movie = new Movie();
 
             //DisplayMovie(movie);
             //DisplayMovie(null);
             //DisplayConfirmation("Are you sure?", "Start");
             #endregion
         }
+        #endregion
 
         private bool DisplayConfirmation ( string message, string title )
         {
@@ -59,65 +62,133 @@ namespace MovieLibrary
 
         #region Playing with methods
 
-        void DisplayMovie ( MovieClass movie )
+        void DisplayMovie ( Movie movie )
         {
             if (movie == null)
                 return;
-            
-            var title = movie.Title;
-         //   movie.description = "Test";
 
-           // movie = new Movie();
+            var title = movie.Title;
+            movie.Description = "Test";
+
+            movie = new Movie();
         }
         #endregion
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            UpdateUI();
+        }
 
         private void OnMovieAdd ( object sender, EventArgs e )
         {
             MovieForm child = new MovieForm();
 
+            //child.Show(); //Modeless, both windows are interactive
+            //Modal - must dismiss child form before main form is accessible
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
             //TODO: Save the movie
-            _movie = child.Movie;
-            //child.Show();
+            AddMovie(child.Movie);
+            UpdateUI();
+        }
+
+        private void UpdateUI ()
+        {
+            lstMovies.Items.Clear();
+            var movies = GetMovies();
+            foreach (var movie in movies)
+            {
+                //ListBox cannot take a null object
+                if (movie != null)
+                    lstMovies.Items.Add(movie);
+            };
+        }
+
+        private void AddMovie ( Movie movie )
+        {
+            for (var index = 0; index < _movies.Length; ++index)
+            {
+                if (_movies[index] == null)
+                {
+                    _movies[index] = movie;
+                    break;
+                };
+            };
+        }
+
+        private Movie[] GetMovies ()
+        {
+            return _movies;
+        }
+
+        private Movie GetSelectedMovie ()
+        {
+            return lstMovies.SelectedItem as Movie;
+        }
+
+        private void UpdateMovie ( Movie oldMovie, Movie newMovie )
+        {
+            for (var index = 0; index < _movies.Length; ++index)
+            {
+                if (_movies[index] == oldMovie)
+                {
+                    _movies[index] = newMovie;
+                    break;
+                };
+            };
+        }
+
+        private void DeleteMovie ( Movie movie )
+        {
+            for (var index = 0; index < _movies.Length; ++index)
+            {
+                if (_movies[index] == movie)
+                {
+                    _movies[index] = null;
+                    break;
+                };
+            };
         }
 
         private void OnMovieEdit ( object sender, EventArgs e )
         {
             //Verify movie
-            if (_movie == null)
-            {
-
+            var movie = GetSelectedMovie();
+            if (movie == null)
                 return;
-            }
+
             var child = new MovieForm();
-            child.Movie = _movie;
+            child.Movie = movie;
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
             //TODO: Save the movie
-            _movie = child.Movie;
-        }
-
-        private MovieClass _movie;
-
-        private void OnFileExit ( object sender, EventArgs e )
-        {
-            Close();
+            UpdateMovie(movie, child.Movie);
+            UpdateUI();
         }
 
         private void OnMovieDelete ( object sender, EventArgs e )
         {
-            //verify movie
-            if (_movie == null)
+            //Verify movie
+            var movie = GetSelectedMovie();
+            if (movie == null)
                 return;
 
-            if (DisplayConfirmation($"Are you sure want to delete {_movie.Title}?", "Delete"))
+            //Confirm
+            if (!DisplayConfirmation($"Are you sure you want to delete {movie.Title}?", "Delete"))
                 return;
 
             //TODO: Delete
-            _movie = null;
+            DeleteMovie(movie);
+            UpdateUI();
+        }
+
+        private void OnFileExit ( object sender, EventArgs e )
+        {
+            Close();
         }
 
         private void OnHelpAbout ( object sender, EventArgs e )
@@ -127,13 +198,7 @@ namespace MovieLibrary
             about.ShowDialog(this);
         }
 
-        protected override void OnFormClosing ( FormClosingEventArgs e )
-        {
-            base.OnFormClosing(e);
-
-            if (_movie != null)
-                if (!DisplayConfirmation("Are you sure you want to close?", "Close"))
-            e.Cancel = true;
-        }
+        //private Movie _movie;
+        private Movie[] _movies = new Movie[100];
     }
 }

@@ -211,6 +211,7 @@ namespace CharacterCreator.Winforms
                 txtStr.Text = Toon.Strength.ToString();
                 comboBoxClass.Text = Toon.Class.ToString();
                 comboBoxRace.Text = Toon.Race.ToString();
+                richTextBio.Text = Toon.Description.ToString();
             }
         }
     }
