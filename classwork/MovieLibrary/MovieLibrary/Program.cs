@@ -17,6 +17,7 @@ namespace MovieLibrary
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+            //test to make sure this syncs
         }
     }
 }
