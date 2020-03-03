@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using MovieLibrary.Business;
 
 namespace MovieLibrary.Winforms
 {
     public partial class MovieForm : Form
     {
-        public MovieForm ()
+        #region Constructors
+
+        //If no constructor specified then base default constructor is called automatically
+        public MovieForm () //: base()
         {
             InitializeComponent();
         }
 
-        public MovieForm( Movie movie) : this(movie != null ? "Edit" : "Add", movie)
+        //Call the more specific constructor first - constructor chaining
+        public MovieForm ( Movie movie ) : this(movie != null ? "Edit" : "Add", movie)
         {
             //InitializeComponent();
             //Movie = movie;
@@ -31,12 +29,20 @@ namespace MovieLibrary.Winforms
             Text = title;
             Movie = movie;
         }
-        public Movie Movie
-        {
-            get { return _movie; }
-            set { _movie = value; }
-        }
-        private Movie _movie;
+
+        //Use constructor chaining
+        //private void Initialize ( string title, Movie movie )
+        //{
+        //    InitializeComponent();
+
+        //    Text = title;
+        //    Movie = movie;
+        //}
+        #endregion
+
+        public Movie Movie { get; set; }
+
+        #region Event Handlers
 
         private void OnCancel ( object sender, EventArgs e )
         {
@@ -48,23 +54,25 @@ namespace MovieLibrary.Winforms
         {
             if (!ValidateChildren())
                 return;
-            //TODO: Validation and error reporting
+            // Validation and error reporting
             var movie = GetMovie();
-            //if (!movie.Validate(out var error))
-            //{
-            //    DisplayError(error);
-            //    return;
-            //}
+            if (!movie.Validate(out var error))
+            {
+                DisplayError(error);
+                return;
+            };
 
             Movie = movie;
             DialogResult = DialogResult.OK;
             Close();
         }
+        #endregion
 
         protected override void OnLoad ( EventArgs e )
         {
             base.OnLoad(e);
 
+            //Populate combo
             var genres = Genres.GetAll();
             ddlGenres.Items.AddRange(genres);
 
@@ -85,16 +93,15 @@ namespace MovieLibrary.Winforms
 
         private Movie GetMovie ()
         {
-            var movie = new Movie();
+            var movie = new Movie {
 
-            //Null conditional, not required below
-            //No string property will ever return null
-            movie.Title = txtTitle.Text?.Trim();
-            movie.RunLength = GetAsInt32(txtRunLength);
-            movie.ReleaseYear = GetAsInt32(txtReleaseYear, 1900);
-            movie.Description = txtDescription.Text.Trim();
-            movie.IsClassic = chkIsClassic.Checked;
-
+                //Null conditional
+                Title = txtTitle.Text?.Trim(),
+                RunLength = GetAsInt32(txtRunLength),
+                ReleaseYear = GetAsInt32(txtReleaseYear, 1900),
+                Description = txtDescription.Text.Trim(),
+                IsClassic = chkIsClassic.Checked
+            };
 
             //movie.Genre = (Genre)ddlGenres.SelectedItem; //C-style, crashes if wrong
 
@@ -103,41 +110,16 @@ namespace MovieLibrary.Winforms
             //if (genre != null)
             //    movie.Genre = genre;
 
-            //Pattern match
-            //movie.Genre = ddlGenres.SelectedItem;
+            //Equivalent of as
+            //if (ddlGenres.SelectedItem is Genre)
+            //    genre = (Genre)ddlGenres.SelectedItem;
 
+            //Pattern match
             if (ddlGenres.SelectedItem is Genre genre)
                 movie.Genre = genre;
 
             return movie;
         }
-
-        //private bool ValidateMovie ( Movie movie )
-        //{
-        //    //Title is required
-        //    //if (txtTitle.Text?.Trim() == "")
-        //    if (String.IsNullOrEmpty(movie.Title))
-        //    {
-        //        DisplayError("Title is required.");
-        //        return false;
-        //    };
-
-        //    //Run length >= 0
-        //    if (movie.RunLength < 0)
-        //    {
-        //        DisplayError("Run length must be >= 0.");
-        //        return false;
-        //    };
-
-        //    //Release year >= 1900
-        //    if (movie.ReleaseYear < 1900)
-        //    {
-        //        DisplayError("Release year must be >= 1900.");
-        //        return false;
-        //    };
-
-        //    return true;
-        //}
 
         /// <summary>Displays an error message.</summary>
         /// <param name="message">Error to display.</param>
@@ -148,6 +130,8 @@ namespace MovieLibrary.Winforms
 
         private int GetAsInt32 ( Control control )
         {
+            //DateTime result;
+
             return GetAsInt32(control, 0);
         }
 
@@ -162,9 +146,10 @@ namespace MovieLibrary.Winforms
             return -1;
         }
 
-        private void OnValidateTitle ( object sender, CancelEventArgs e )
+        private void OnValidateTitle ( object sender, System.ComponentModel.CancelEventArgs e )
         {
             var control = sender as TextBox;
+
             if (String.IsNullOrEmpty(control.Text))
             {
                 //DisplayError("Title is required");
@@ -174,27 +159,25 @@ namespace MovieLibrary.Winforms
                 _errors.SetError(control, "");
         }
 
-        private void OnValidateRunLength ( object sender, CancelEventArgs e )
+        private void OnValidateRunLength ( object sender, System.ComponentModel.CancelEventArgs e )
         {
             var control = sender as Control;
             var value = GetAsInt32(control, 0);
             if (value < 0)
             {
-                //DisplayError("Run length must be >= 0.");
-                _errors.SetError(control, "Run length must be >= 0");
+                _errors.SetError(control, "Run length must be >= 0.");
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");
         }
 
-        private void OnValidateReleaseYear ( object sender, CancelEventArgs e )
+        private void OnValidateReleaseYear ( object sender, System.ComponentModel.CancelEventArgs e )
         {
             var control = sender as Control;
-            var value = GetAsInt32(control, 0);
+            var value = GetAsInt32(control, 1900);
             if (value < 1900)
             {
-                //DisplayError("Release Year must be >= 1900");
-                _errors.SetError(control, "Release Year must be >= 1900");
+                _errors.SetError(control, "Release year must be >= 1900.");
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");
