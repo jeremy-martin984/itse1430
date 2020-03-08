@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 3
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,34 +40,52 @@ namespace CharacterCreator.Winforms
 
         private void OnNew ( object sender, EventArgs e )
         {
-            var newCharacter = new CharacterCreatorForm();
-            newCharacter.ShowDialog(this);
+            var child = new CharacterCreatorForm();
+
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                var character = _characters.SaveToon(child.Toon);
+                if (character != null)
+                {
+                    UpdateUI();
+                    return;
+                };
+
+                MessageBox.Show("Add Failed");
+
+            } while (true);
         }
 
         private void EditCharacter(object sender, EventArgs e)
         {
-            string fileName;
-            if (CharacterOpenForm.ShowDialog() == DialogResult.OK)
+            var child = new CharacterCreatorForm();
+
+            child.Toon = GetSelectedCharacter();
+            if (child.Toon == null)
             {
-                fileName = CharacterOpenForm.FileName;
-            }
-            else
-            {
+                MessageBox.Show("No Character selected");
                 return;
             }
+                do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
 
-            var editCharacter = new CharacterCreatorForm {
-                Text = "Edit Character"
-            };
-            var reader = new XmlSerializer(typeof(Character));
-            var file = new StreamReader(fileName);
-            var editToon = (Character)reader.Deserialize(file);
-            file.Close();
-            editCharacter.Toon = editToon;
-            //todo:load in character
-            editCharacter.ShowDialog(this);
+                var character = _characters.SaveToon(child.Toon);
+                if (character != null)
+                {
+                    UpdateUI();
+                    return;
+                };
 
-        }
+                MessageBox.Show("Edit Failed");
+
+            } while (true);
+
+    }
 
         private void DeleteCharacter(object sender, EventArgs e)
         {
@@ -87,5 +110,26 @@ namespace CharacterCreator.Winforms
             //TODO:Something more robust with existing characters
         }
 
+        private Character GetSelectedCharacter()
+        {
+            return lstToons.SelectedItem as Character;
+        }
+        private void UpdateUI()
+        {
+            lstToons.Items.Clear();
+            var characters = _characters.GetAll();
+            foreach (var character in characters)
+            {
+                lstToons.Items.Add(character);
+            };
+        }
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+            UpdateUI();
+        }
+
+        public CharacterDatabase _characters = new CharacterDatabase();
     }
 }

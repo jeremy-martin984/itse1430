@@ -1,14 +1,13 @@
-﻿using System;
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 3
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
-/*Jeremy Martin
- * ITSE 1430
- * Lab 2
- */
 
 namespace CharacterCreator.Winforms
 {

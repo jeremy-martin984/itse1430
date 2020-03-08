@@ -169,7 +169,6 @@ namespace MovieLibrary.Business
 
             return CloneMovie(movie);
         }
-        private readonly LinkedList<Movie> _test= new LinkedList<Movie>();
         //private readonly Movie[] _movies = new Movie[100];
         private readonly List<Movie> _movies = new List<Movie>();
         private int _id = 1;

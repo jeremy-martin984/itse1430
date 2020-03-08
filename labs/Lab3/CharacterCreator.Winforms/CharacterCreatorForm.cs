@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 3
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +42,7 @@ namespace CharacterCreator.Winforms
 
         private void OnSave ( object sender, EventArgs e )
         {
-            var newToon = new Character {
+            Toon = new Character {
                 Agility = GetAsInt32(txtAgi.Text),
                 Charisma = GetAsInt32(txtCha.Text),
                 Constitution = GetAsInt32(txtCon.Text),
@@ -51,17 +56,15 @@ namespace CharacterCreator.Winforms
 
             var pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
 
-            if (!newToon.ErrorCheck(pointsRemaining, out var error))
+            if (!Toon.ErrorCheck(pointsRemaining, out var error))
             {
                 MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
                 return;
             }
             //TODO: Better input validation
-            var writer = new XmlSerializer(typeof(Character));
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + txtName.Text + ".ccs";
-            var file = File.Create(path);
-            writer.Serialize(file, newToon);
-            file.Close();
+
+            DialogResult = DialogResult.OK;
+            
             Close();
         }
 
@@ -211,6 +214,7 @@ namespace CharacterCreator.Winforms
                 txtStr.Text = Toon.Strength.ToString();
                 comboBoxClass.Text = Toon.Class.ToString();
                 comboBoxRace.Text = Toon.Race.ToString();
+                richTextBio.Text = Toon.Description.ToString();
             }
         }
     }

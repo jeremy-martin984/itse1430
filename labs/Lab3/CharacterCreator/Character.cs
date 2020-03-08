@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 3
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +22,33 @@ namespace CharacterCreator
         /// Character's name
         /// </summary>
         public string Name
-        { get; set; }
+        {
+            get { return _name ?? "";  }
+            set { _name = value?.Trim(); }
+        }
 
         /// <summary>
         /// Characters profession/class.
         /// </summary>
         public string Class
-        { get; set; }
+        {
+            get { return _class ?? ""; }
+            set { _class = value?.Trim(); }
+        }
 
         /// <summary>
         /// Character's race
         /// </summary>
         public string Race
+        {
+            get { return _race ?? ""; }
+            set { _race = value?.Trim(); }
+        }
+
+        /// <summary>
+        /// Character ID, must be >= 1
+        /// </summary>
+        public int Id
         { get; set; }
 
         /// <summary>
@@ -65,7 +85,10 @@ namespace CharacterCreator
         /// Character description, make a good life story. Avoid as much walking as Tolkien
         /// </summary>
         public string Description
-        { get; set; }
+        {
+            get { return _description ?? ""; }
+            set { _description = value?.Trim(); }
+        }
 
         /// <summary>
         /// takes remaining points on character string and validates all other fields for valid input
@@ -114,5 +137,10 @@ namespace CharacterCreator
                 return true;
             }
         }
+
+        private string _name;
+        private string _race;
+        private string _class;
+        private string _description;
     }
 }
