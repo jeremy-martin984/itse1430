@@ -90,6 +90,13 @@ namespace CharacterCreator
             set { _description = value?.Trim(); }
         }
 
+
+        public override string ToString ()
+        {
+
+            //TODO: Remove Id, only used for debug/showing it works
+            return Id + ":  " + Name;
+        }
         /// <summary>
         /// takes remaining points on character string and validates all other fields for valid input
         /// </summary>

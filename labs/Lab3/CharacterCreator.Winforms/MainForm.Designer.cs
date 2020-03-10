@@ -37,7 +37,6 @@
             this.deleteCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CharacterOpenForm = new System.Windows.Forms.OpenFileDialog();
             this.lstToons = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +52,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(597, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(597, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,7 +61,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
@@ -80,7 +79,7 @@
             this.editCharacterToolStripMenuItem,
             this.deleteCharacterToolStripMenuItem});
             this.characterToolStripMenuItem.Name = "characterToolStripMenuItem";
-            this.characterToolStripMenuItem.Size = new System.Drawing.Size(102, 32);
+            this.characterToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
             this.characterToolStripMenuItem.Text = "&Character";
             // 
             // toolStripMenuItem1
@@ -112,7 +111,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -123,19 +122,14 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnHelpAbout);
             // 
-            // CharacterOpenForm
-            // 
-            this.CharacterOpenForm.Filter = "Character Creator|*.ccs|All files|*.*";
-            this.CharacterOpenForm.InitialDirectory = "Environment.SpecialFolder.MyDocuments";
-            // 
             // lstToons
             // 
             this.lstToons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstToons.FormattingEnabled = true;
             this.lstToons.ItemHeight = 20;
-            this.lstToons.Location = new System.Drawing.Point(0, 36);
+            this.lstToons.Location = new System.Drawing.Point(0, 33);
             this.lstToons.Name = "lstToons";
-            this.lstToons.Size = new System.Drawing.Size(597, 300);
+            this.lstToons.Size = new System.Drawing.Size(597, 303);
             this.lstToons.TabIndex = 1;
             // 
             // MainForm
@@ -168,7 +162,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editCharacterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteCharacterToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog CharacterOpenForm;
         private System.Windows.Forms.ListBox lstToons;
     }
 }

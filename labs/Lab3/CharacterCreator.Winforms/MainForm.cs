@@ -23,6 +23,7 @@ namespace CharacterCreator.Winforms
         public MainForm()
         {
             InitializeComponent();
+            _characters = new CharacterDatabase();
         }
         private void OnExit ( object sender, EventArgs e )
         {
@@ -54,60 +55,68 @@ namespace CharacterCreator.Winforms
                     return;
                 };
 
+                //TODO:Better error message.
                 MessageBox.Show("Add Failed");
 
             } while (true);
         }
 
-        private void EditCharacter(object sender, EventArgs e)
+        private void EditCharacter ( object sender, EventArgs e )
         {
-            var child = new CharacterCreatorForm();
-
-            child.Toon = GetSelectedCharacter();
-            if (child.Toon == null)
-            {
-                MessageBox.Show("No Character selected");
+            //Verify movie
+            var character = GetSelectedCharacter();
+            if (character == null)
                 return;
-            }
-                do
+
+            var child = new CharacterCreatorForm {
+                Toon = character
+            };
+
+            child.Text = "Edit Character";
+
+            do
             {
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                var character = _characters.SaveToon(child.Toon);
-                if (character != null)
+                // Save the movie
+                var error = _characters.Update(character.Id, child.Toon);
+                if (String.IsNullOrEmpty(error))
                 {
                     UpdateUI();
                     return;
                 };
 
-                MessageBox.Show("Edit Failed");
-
+                DisplayError(error);
             } while (true);
+        }
 
-    }
+
+        private bool DisplayConfirmation ( string message, string title )
+        {
+            //Display a confirmation dialog
+            var result = MessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            //Return true if user selected OK
+            return result == DialogResult.OK;
+        }
 
         private void DeleteCharacter(object sender, EventArgs e)
         {
-            string fileName;
-            if (CharacterOpenForm.ShowDialog() == DialogResult.OK)
-            {
-                fileName = CharacterOpenForm.FileName;
-            } else
-            {
+            var character = GetSelectedCharacter();
+            if (character == null)
                 return;
-            }
 
-            var result = MessageBox.Show("This will delete the character, are you sure?", "Warning!", MessageBoxButtons.YesNo);
-            if (result == DialogResult.No)
+            if (!DisplayConfirmation($"Are you sure you want to delete {character.Name}?", "Delete"))
                 return;
-            else
-            {
-                File.Delete(fileName);
-                MessageBox.Show("Character Has Been Deleted");
-            }
 
-            //TODO:Something more robust with existing characters
+            _characters.Delete(character.Id);
+            UpdateUI();
+        }
+
+        private void DisplayError ( string message )
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private Character GetSelectedCharacter()
@@ -122,14 +131,16 @@ namespace CharacterCreator.Winforms
             {
                 lstToons.Items.Add(character);
             };
+            _characters.SaveList();
         }
 
         protected override void OnLoad ( EventArgs e )
         {
             base.OnLoad(e);
+            _characters.LoadToon();
             UpdateUI();
         }
 
-        public CharacterDatabase _characters = new CharacterDatabase();
+        private readonly ICharacterDatabase _characters;
     }
 }
