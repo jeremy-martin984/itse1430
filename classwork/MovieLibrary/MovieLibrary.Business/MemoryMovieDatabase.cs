@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MovieLibrary.Business
 {
+
     public class MemoryMovieDatabase : IMovieDatabase
     {
 
-        public Movie Add ( Movie movie )
+        public Movie Add(Movie movie)
         {
             //TODO: Validate
             if (movie == null)
                 return null;
-            if (!movie.Validate(out var error))
+
+            //.Net validation
+            // var errors = new List<ValidationResult>();
+            // if (!Validator.TryValidateObject(movie, new ValidationContext(movie), errors, true))
+            var errors = new ObjectValidator().Validate(movie);
+            if (errors.Any())
                 return null;
 
             //Movie names must be unique
@@ -37,7 +44,7 @@ namespace MovieLibrary.Business
             return CloneMovie(item);
         }
 
-        public void Delete ( int id )
+        public void Delete(int id)
         {
             //TODO: Validate
             if (id <= 0)
@@ -56,8 +63,9 @@ namespace MovieLibrary.Business
             //};
         }
 
-        public Movie[] GetAll ()
+        public IEnumerable<Movie> GetAll()
         {
+            /*
             //Clone objects
             var items = new Movie[_movies.Count];
             var index = 0;
@@ -67,18 +75,25 @@ namespace MovieLibrary.Business
             };
 
             return items;
+            */
+            foreach (var movie in _movies)
+            {
+                yield return movie;
+            };
+
         }
 
         //TODO: Validate
         //TODO: Movie names must be unique
         //TODO: Clone movie to store
-        public string Update ( int id, Movie movie )
+        public string Update(int id, Movie movie)
         {
             //TODO: Validate
             if (movie == null)
                 return "Movie is null";
-            if (!movie.Validate(out var error))
-                return error;
+            var errors = new ObjectValidator().Validate(movie);
+            if (errors.Any())
+                return null;
             if (id <= 0)
                 return "Id is invalid";
 
@@ -97,7 +112,7 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        private Movie CloneMovie ( Movie movie )
+        private Movie CloneMovie(Movie movie)
         {
             var item = new Movie();
             CopyMovie(item, movie, true);
@@ -124,19 +139,19 @@ namespace MovieLibrary.Business
             //return item;
         }
 
-        private void CopyMovie ( Movie target, Movie source, bool includeId )
+        private void CopyMovie(Movie target, Movie source, bool includeId)
         {
             if (includeId)
                 target.Id = source.Id;
             target.Title = source.Title;
             target.Description = source.Description;
-            target.Genre =source.Genre != null ? new Genre(source.Genre.Description) : null;
+            target.Genre = source.Genre != null ? new Genre(source.Genre.Description) : null;
             target.IsClassic = source.IsClassic;
             target.ReleaseYear = source.ReleaseYear;
             target.RunLength = source.RunLength;
         }
 
-        private Movie FindByTitle ( string title )
+        private Movie FindByTitle(string title)
         {
             foreach (var movie in _movies)
             {
@@ -147,7 +162,7 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        private Movie FindById ( int id )
+        private Movie FindById(int id)
         {
             foreach (var movie in _movies)
             {
@@ -158,9 +173,9 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        public Movie Get (int id)
+        public Movie Get(int id)
         {
-            if (id <=0)
+            if (id <= 0)
                 return null;
 
             var movie = FindById(id);

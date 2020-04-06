@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
-
 using MovieLibrary.Business;
 
 namespace MovieLibrary.Winforms
@@ -56,11 +56,12 @@ namespace MovieLibrary.Winforms
                 return;
             // Validation and error reporting
             var movie = GetMovie();
-            if (!movie.Validate(out var error))
+            var errors = new ObjectValidator().Validate(movie);
+            if (errors.Any())
             {
-                DisplayError(error);
+                DisplayError("Error");
                 return;
-            };
+            }
 
             Movie = movie;
             DialogResult = DialogResult.OK;
