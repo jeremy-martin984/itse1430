@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieLibrary.Business
 {
-    public class SeedDatabase
+    public static class SeedDatabase
     {
-        public IMovieDatabase SeedIfEmpty (IMovieDatabase database )
+        public static IMovieDatabase SeedIfEmpty ( this IMovieDatabase database )
         {
             if (database.GetAll().Any())
             {

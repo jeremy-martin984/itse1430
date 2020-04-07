@@ -56,7 +56,7 @@ namespace MovieLibrary.Winforms
                 return;
             // Validation and error reporting
             var movie = GetMovie();
-            var errors = new ObjectValidator().Validate(movie);
+            var errors = ObjectValidator.Validate(movie);
             if (errors.Any())
             {
                 DisplayError("Error");

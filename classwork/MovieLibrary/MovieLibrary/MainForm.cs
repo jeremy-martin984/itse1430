@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using MovieLibrary.Business;
+using MovieLibrary.Business.Memory;
 using MovieLibrary.Winforms;
 
 namespace MovieLibrary
@@ -38,7 +39,8 @@ namespace MovieLibrary
             
             base.OnLoad(e);
 
-            new SeedDatabase().SeedIfEmpty(_movies);
+            _movies.SeedIfEmpty();
+
             UpdateUI();
         }
 

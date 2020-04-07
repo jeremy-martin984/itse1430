@@ -63,7 +63,6 @@ namespace CharacterCreator.Winforms
 
         private void EditCharacter ( object sender, EventArgs e )
         {
-            //Verify movie
             var character = GetSelectedCharacter();
             if (character == null)
                 return;
@@ -79,7 +78,6 @@ namespace CharacterCreator.Winforms
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                // Save the movie
                 var error = _characters.Update(character.Id, child.Toon);
                 if (String.IsNullOrEmpty(error))
                 {
@@ -141,6 +139,6 @@ namespace CharacterCreator.Winforms
             UpdateUI();
         }
 
-        private readonly ICharacterDatabase _characters;
+        private readonly ICharacterRoster _characters;
     }
 }

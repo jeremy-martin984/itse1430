@@ -42,6 +42,8 @@ namespace CharacterCreator.Winforms
 
         private void OnSave ( object sender, EventArgs e )
         {
+            if (!ValidateChildren())
+                return;
             Toon = new Character {
                 Agility = GetAsInt32(txtAgi.Text),
                 Charisma = GetAsInt32(txtCha.Text),
@@ -51,14 +53,14 @@ namespace CharacterCreator.Winforms
                 Name = txtName.Text,
                 Race = comboBoxRace.Text,
                 Class = comboBoxClass.Text,
-                Description = richTextBio.Text
+                Description = richTextBio.Text,
+                PointsRemaining = GetAsInt32(txtPointsRemaining.Text)
             };
 
-            var pointsRemaining = GetAsInt32(txtPointsRemaining.Text);
-
-            if (!Toon.ErrorCheck(pointsRemaining, out var error))
+            IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> errors = ObjectValidator.Validate(Toon);
+            if (errors.Any())
             {
-                MessageBox.Show(error, "Missing Data!", MessageBoxButtons.OK);
+                MessageBox.Show("Error");
                 return;
             }
             //TODO: Better input validation
@@ -68,10 +70,10 @@ namespace CharacterCreator.Winforms
             Close();
         }
 
+
         private void PlusStr ( object sender, EventArgs e )
         {
-            var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
+            StatHandler.PlusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -83,8 +85,7 @@ namespace CharacterCreator.Winforms
 
         private void MinusStr ( object sender, EventArgs e )
         {
-            var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
+            StatHandler.MinusStat(txtPointsRemaining.Text, txtStr.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -96,8 +97,7 @@ namespace CharacterCreator.Winforms
 
         private void PlusInt ( object sender, EventArgs e )
         {
-            var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
+            StatHandler.PlusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -109,8 +109,7 @@ namespace CharacterCreator.Winforms
 
         private void PlusAgi ( object sender, EventArgs e )
         {
-            var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
+            StatHandler.PlusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -122,8 +121,7 @@ namespace CharacterCreator.Winforms
 
         private void PlusCon ( object sender, EventArgs e )
         {
-            var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
+            StatHandler.PlusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -135,8 +133,7 @@ namespace CharacterCreator.Winforms
 
         private void PlusCha ( object sender, EventArgs e )
         {
-            var plus = new StatHandler();
-            plus.PlusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
+            StatHandler.PlusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -148,8 +145,7 @@ namespace CharacterCreator.Winforms
 
         private void MinusInt ( object sender, EventArgs e )
         {
-            var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
+            StatHandler.MinusStat(txtPointsRemaining.Text, txtInt.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -161,8 +157,7 @@ namespace CharacterCreator.Winforms
 
         private void MinusAgi ( object sender, EventArgs e )
         {
-            var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
+            StatHandler.MinusStat(txtPointsRemaining.Text, txtAgi.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -174,8 +169,7 @@ namespace CharacterCreator.Winforms
 
         private void MinusCon ( object sender, EventArgs e )
         {
-            var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
+            StatHandler.MinusStat(txtPointsRemaining.Text, txtCon.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -188,8 +182,7 @@ namespace CharacterCreator.Winforms
 
         private void MinusCha ( object sender, EventArgs e )
         {
-            var minus = new StatHandler();
-            minus.MinusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
+            StatHandler.MinusStat(txtPointsRemaining.Text, txtCha.Text, out var temp, out var temp2);
             if (temp2 == null)
                 return;
             else
@@ -204,7 +197,7 @@ namespace CharacterCreator.Winforms
             base.OnLoad(e);
             if (Toon != null)
             {
-                //TODO:Delete old name if name changed
+
                 txtName.Text = Toon.Name.ToString();
                 txtAgi.Text = Toon.Agility.ToString();
                 txtCha.Text = Toon.Charisma.ToString();
@@ -216,6 +209,49 @@ namespace CharacterCreator.Winforms
                 comboBoxRace.Text = Toon.Race.ToString();
                 richTextBio.Text = Toon.Description.ToString();
             }
+        }
+
+        private void CharacterCreatorForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnValidateName(object sender, CancelEventArgs e)
+        {
+            var control = sender as TextBox;
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                _errors.SetError(control, "A Name is required");
+                e.Cancel = true;
+            }
+            else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateClass(object sender, CancelEventArgs e)
+        {
+            var control = sender as ComboBox;
+
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                _errors.SetError(control, "A class is required");
+                e.Cancel = true;
+            }
+            else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateRace(object sender, CancelEventArgs e)
+        {
+            var control = sender as ComboBox;
+
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                _errors.SetError(control, "A Race is required");
+                e.Cancel = true;
+            }
+            else
+                _errors.SetError(control, "");
         }
     }
 }

@@ -14,9 +14,9 @@ namespace CharacterCreator
     /// <summary>
     /// Takes two strings from text field, parses as ints, and returns new values (as strings) when appropriate.
     /// </summary>
-    public class StatHandler
+    public static class StatHandler
     {
-        public void PlusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
+        public static void PlusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
         {
             var temp = Int32.Parse(pointsRemaining);
             if (temp == 0)
@@ -35,7 +35,7 @@ namespace CharacterCreator
             }
         }
 
-        public void MinusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
+        public static void MinusStat ( string pointsRemaining, string statIncrease, out string newPointsRemaining, out string newStatTotal )
         {
             var temp = Int32.Parse(statIncrease);
             if (temp == 50)

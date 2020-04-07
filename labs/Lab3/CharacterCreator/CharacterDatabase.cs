@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace CharacterCreator
 {
-    public class CharacterDatabase : ICharacterDatabase
+    public class CharacterDatabase : ICharacterRoster
     {
         public Character SaveToon ( Character character )
         {
@@ -33,6 +33,7 @@ namespace CharacterCreator
 
         public void SaveList ()
         {
+            //Saves the character list to mydocuments, primarily for troubleshooting
             var writer = new XmlSerializer(typeof(List<Character>));
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\characterDatabase.ccs";
             var file = File.Create(path);
@@ -43,8 +44,9 @@ namespace CharacterCreator
         {
             if (character == null)
                 return "No Character found";
-            if (!character.ErrorCheck(0, out var error))
-                return error;
+            var errors = ObjectValidator.Validate(character);
+            if (errors.Any())
+                return null;
             if (id < 0)
                 return "Id is invalid";
 
@@ -62,6 +64,8 @@ namespace CharacterCreator
         }
         public void LoadToon ()
         {
+            //Loads character data from xml file, mainly for troubleshooting
+
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\characterDatabase.ccs";
             if (!File.Exists(path))
                 return;
@@ -136,6 +140,7 @@ namespace CharacterCreator
             target.Constitution = source.Constitution;
             target.Agility = source.Agility;
             target.Charisma = source.Charisma;
+            target.PointsRemaining = source.PointsRemaining;
         }
         private List<Character> _characters = new List<Character>();
         private int _id = 1;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent ()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -61,6 +62,8 @@
             this.btnMinAgi = new System.Windows.Forms.Button();
             this.btnMinCon = new System.Windows.Forms.Button();
             this.btnMinCha = new System.Windows.Forms.Button();
+            this._errors = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
@@ -69,6 +72,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(150, 26);
             this.txtName.TabIndex = 1;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateName);
             // 
             // btnSave
             // 
@@ -208,6 +212,7 @@
             this.comboBoxClass.Size = new System.Drawing.Size(150, 28);
             this.comboBoxClass.Sorted = true;
             this.comboBoxClass.TabIndex = 16;
+            this.comboBoxClass.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateClass);
             // 
             // comboBoxRace
             // 
@@ -226,6 +231,7 @@
             this.comboBoxRace.Size = new System.Drawing.Size(150, 28);
             this.comboBoxRace.Sorted = true;
             this.comboBoxRace.TabIndex = 17;
+            this.comboBoxRace.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateRace);
             // 
             // txtPointsRemaining
             // 
@@ -234,7 +240,7 @@
             this.txtPointsRemaining.ReadOnly = true;
             this.txtPointsRemaining.Size = new System.Drawing.Size(60, 26);
             this.txtPointsRemaining.TabIndex = 23;
-            this.txtPointsRemaining.Text = "0";
+            this.txtPointsRemaining.Text = "50";
             // 
             // lblName
             // 
@@ -390,13 +396,19 @@
             this.btnMinCha.UseVisualStyleBackColor = true;
             this.btnMinCha.Click += new System.EventHandler(this.MinusCha);
             // 
+            // _errors
+            // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errors.ContainerControl = this;
+            // 
             // CharacterCreatorForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(710, 575);
+            this.ClientSize = new System.Drawing.Size(837, 572);
             this.Controls.Add(this.btnMinCha);
             this.Controls.Add(this.btnMinCon);
             this.Controls.Add(this.btnMinAgi);
@@ -431,11 +443,15 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(859, 628);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(859, 628);
             this.Name = "CharacterCreatorForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Character";
+            this.Load += new System.EventHandler(this.CharacterCreatorForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,5 +491,6 @@
         private System.Windows.Forms.Button btnMinAgi;
         private System.Windows.Forms.Button btnMinCon;
         private System.Windows.Forms.Button btnMinCha;
+        private System.Windows.Forms.ErrorProvider _errors;
     }
 }

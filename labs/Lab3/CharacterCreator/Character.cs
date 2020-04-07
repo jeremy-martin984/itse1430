@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CharacterCreator
     /// <summary>
     /// Represents all info for a character
     /// </summary>
-    public class Character
+    public class Character : IValidatableObject
     {
         /// <summary>
         /// Character's name
@@ -89,6 +90,8 @@ namespace CharacterCreator
             get { return _description ?? ""; }
             set { _description = value?.Trim(); }
         }
+        public int PointsRemaining
+        { get; set; }
 
 
         public override string ToString ()
@@ -103,46 +106,34 @@ namespace CharacterCreator
         /// <param name="pointsRemaining"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public bool ErrorCheck ( int pointsRemaining, out string error )
+        public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
-            if (pointsRemaining != 0)
+            if (PointsRemaining != 0)
             {
-                error = "You still have points to spend.";
-                return false;
-            }
+                yield return new ValidationResult("You still have points to spend", new[] { nameof(PointsRemaining) });
+            };
             if (String.IsNullOrEmpty(Name))
             {
-                error = "A name is required.";
-                return false;
-            }
+                yield return new ValidationResult("Name cannot be empty", new[] { nameof(Name) });
+            };
 
             
             char[] charsToTrim = { ':', '*', '?', '<', '>', '\\', '/' };
             var temp = Name.Trim(charsToTrim);
             if (temp != Name)
             {
-                error = @"The characters :, *, ?, <, >, \ and / Are not allowed.";
-                return false;
-            }
+                yield return new ValidationResult(@"The characters :, *, ?, <, >, \ and / Are not allowed.", new[] { nameof(Name) });
+            };
 
             if (String.IsNullOrEmpty(Class))
             {
-                error = "A Class is required.";
-                return false;
-            }
+                yield return new ValidationResult("You must pick a class", new[] { nameof(Class) });
+            };
 
             if (String.IsNullOrEmpty(Race))
             {
-                error = "A race is required.";
-                return false;
-
-            }
-
-            else
-            {
-                error = null;
-                return true;
-            }
+                yield return new ValidationResult("You must pick a race", new[] { nameof(Race) });
+            };
         }
 
         private string _name;

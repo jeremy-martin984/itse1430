@@ -1,30 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace MovieLibrary.Business
+namespace MovieLibrary.Business.Memory
 {
 
-    public class MemoryMovieDatabase : IMovieDatabase
+    public class MemoryMovieDatabase : MovieDatabase
     {
 
-        public Movie Add(Movie movie)
+        protected override Movie AddCore(Movie movie)
         {
-            //TODO: Validate
-            if (movie == null)
-                return null;
-
-            //.Net validation
-            // var errors = new List<ValidationResult>();
-            // if (!Validator.TryValidateObject(movie, new ValidationContext(movie), errors, true))
-            var errors = new ObjectValidator().Validate(movie);
-            if (errors.Any())
-                return null;
-
-            //Movie names must be unique
-            var existing = FindByTitle(movie.Title);
-            if (existing != null)
-                return null;
 
             //TODO: Clone movie to store     
             var item = CloneMovie(movie);
@@ -44,12 +28,8 @@ namespace MovieLibrary.Business
             return CloneMovie(item);
         }
 
-        public void Delete(int id)
+        protected override void DeleteCore(int id)
         {
-            //TODO: Validate
-            if (id <= 0)
-                return;
-
             var movie = FindById(id);
             if (movie != null)
                 _movies.Remove(movie);
@@ -63,7 +43,16 @@ namespace MovieLibrary.Business
             //};
         }
 
-        public IEnumerable<Movie> GetAll()
+        protected override Movie GetCore(int id)
+        {
+            var movie = FindById(id);
+            if (movie == null)
+                return null;
+
+            return CloneMovie(movie);
+        }
+
+        protected override IEnumerable<Movie> GetAllCore()
         {
             /*
             //Clone objects
@@ -86,30 +75,12 @@ namespace MovieLibrary.Business
         //TODO: Validate
         //TODO: Movie names must be unique
         //TODO: Clone movie to store
-        public string Update(int id, Movie movie)
+        protected override void UpdateCore ( int id, Movie movie )
         {
-            //TODO: Validate
-            if (movie == null)
-                return "Movie is null";
-            var errors = new ObjectValidator().Validate(movie);
-            if (errors.Any())
-                return null;
-            if (id <= 0)
-                return "Id is invalid";
-
             var existing = FindById(id);
-            if (existing == null)
-                return "Movie not found";
-
-            //Movie names must be unique
-            var sameName = FindByTitle(movie.Title);
-            if (sameName != null && sameName.Id != id)
-                return "Movie must be unique";
-
             //Update
             CopyMovie(existing, movie, false);
 
-            return null;
         }
 
         private Movie CloneMovie(Movie movie)
@@ -151,7 +122,7 @@ namespace MovieLibrary.Business
             target.RunLength = source.RunLength;
         }
 
-        private Movie FindByTitle(string title)
+        protected override Movie FindByTitle(string title)
         {
             foreach (var movie in _movies)
             {
@@ -162,7 +133,7 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        private Movie FindById(int id)
+        protected override Movie FindById(int id)
         {
             foreach (var movie in _movies)
             {
@@ -173,17 +144,6 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        public Movie Get(int id)
-        {
-            if (id <= 0)
-                return null;
-
-            var movie = FindById(id);
-            if (movie == null)
-                return null;
-
-            return CloneMovie(movie);
-        }
         //private readonly Movie[] _movies = new Movie[100];
         private readonly List<Movie> _movies = new List<Movie>();
         private int _id = 1;
