@@ -183,5 +183,10 @@ namespace MovieLibrary.Winforms
             } else
                 _errors.SetError(control, "");
         }
+
+        private void MovieForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,10 @@
-﻿namespace CharacterCreator.Winforms
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 3
+ * 4/6/2020
+ */
+
+namespace CharacterCreator.Winforms
 {
     partial class AboutBox
     {

@@ -1,6 +1,7 @@
 ﻿/*Jeremy Martin
  * ITSE 1430
  * Lab 3
+ * 4/6/2020
  */
 
 using System;
