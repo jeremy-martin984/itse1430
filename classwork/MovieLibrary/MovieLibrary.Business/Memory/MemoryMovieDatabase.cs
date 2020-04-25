@@ -1,15 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace MovieLibrary.Business.Memory
 {
+    //public interface ISelectableObject
+    //{
+    //    void Select ();
+    //}
 
+    //public interface IResizableObject
+    //{
+    //    void Resize ( int width, int height );
+    //}
+
+    //public struct SelectableResizableObject : IResizableObject, ISelectableObject
+    //{
+    //    public void Resize ( int width, int height );
+    //    public void Select ();
+    //}
+
+    // Is-a relationship
     public class MemoryMovieDatabase : MovieDatabase
     {
-
-        protected override Movie AddCore(Movie movie)
+        protected override Movie AddCore ( Movie movie )
         {
-
             //TODO: Clone movie to store     
             var item = CloneMovie(movie);
             item.Id = _id++;
@@ -28,7 +44,7 @@ namespace MovieLibrary.Business.Memory
             return CloneMovie(item);
         }
 
-        protected override void DeleteCore(int id)
+        protected override void DeleteCore ( int id )
         {
             var movie = FindById(id);
             if (movie != null)
@@ -43,8 +59,8 @@ namespace MovieLibrary.Business.Memory
             //};
         }
 
-        protected override Movie GetCore(int id)
-        {
+        protected override Movie GetCore ( int id )
+        {            
             var movie = FindById(id);
             if (movie == null)
                 return null;
@@ -52,25 +68,36 @@ namespace MovieLibrary.Business.Memory
             return CloneMovie(movie);
         }
 
-        protected override IEnumerable<Movie> GetAllCore()
+        protected override IEnumerable<Movie> GetAllCore ()
         {
-            /*
-            //Clone objects
-            var items = new Movie[_movies.Count];
-            var index = 0;
-            foreach (var movie in _movies)
-            {
-                items[index++] = CloneMovie(movie);
-            };
+//            throw new Exception("Failed");
 
-            return items;
-            */
-            foreach (var movie in _movies)
-            {
-                yield return movie;
-            };
+            //Filtering
+            var items = _movies.Where(m => true);
 
+            //Transforms
+            return _movies.Select(m => CloneMovie(m));
+
+            //items.Any() => true if any elements or any elements meet a condition
+            //items.All() => true for all elements
+            //new[] { 1, 2 }.Join(new[] { 3, 4, });
+            //items.Max(i => i.Id); .Min(); .Sum()
+
+            //Debug.WriteLine("Starting GetAllCore");
+
+            ////Use an iterator Luke
+            //foreach (var movie in _movies)
+            //{
+            //    Debug.WriteLine($"Returning {movie.Id}");
+            //    yield return CloneMovie(movie);
+            //    Debug.WriteLine($"Returned {movie.Id}");
+            //};
         }
+
+        //private sealed class Enumerator<T> : IEnumerator<T>
+        //{
+        //    ...
+        //}
 
         //TODO: Validate
         //TODO: Movie names must be unique
@@ -78,12 +105,12 @@ namespace MovieLibrary.Business.Memory
         protected override void UpdateCore ( int id, Movie movie )
         {
             var existing = FindById(id);
+
             //Update
             CopyMovie(existing, movie, false);
-
         }
 
-        private Movie CloneMovie(Movie movie)
+        private Movie CloneMovie ( Movie movie )
         {
             var item = new Movie();
             CopyMovie(item, movie, true);
@@ -110,41 +137,81 @@ namespace MovieLibrary.Business.Memory
             //return item;
         }
 
-        private void CopyMovie(Movie target, Movie source, bool includeId)
+        private void CopyMovie ( Movie target, Movie source, bool includeId )
         {
             if (includeId)
                 target.Id = source.Id;
             target.Title = source.Title;
             target.Description = source.Description;
-            target.Genre = source.Genre != null ? new Genre(source.Genre.Description) : null;
+            if (source.Genre != null)
+                target.Genre = new Genre(source.Genre.Description);
+            else
+                target.Genre = null;
             target.IsClassic = source.IsClassic;
             target.ReleaseYear = source.ReleaseYear;
             target.RunLength = source.RunLength;
         }
 
-        protected override Movie FindByTitle(string title)
+        //Example of doing more complex querying with programmatic filters
+        private IEnumerable<Movie> Query ( string title, int releaseYear )
         {
-            foreach (var movie in _movies)
-            {
-                if (String.Compare(movie?.Title, title, true) == 0)
-                    return movie;
-            };
+            var query = from movie in _movies
+                        select movie;
 
-            return null;
+            if (!String.IsNullOrEmpty(title))
+                query = query.Where(m => String.Compare(m.Title, title, true) == 0);
+
+            if (releaseYear > 0)
+                query = query.Where(m => m.ReleaseYear >= releaseYear);
+
+            return query.ToList();
         }
 
-        protected override Movie FindById(int id)
-        {
-            foreach (var movie in _movies)
-            {
-                if (movie.Id == id)
-                    return movie;
-            };
+        protected override Movie FindByTitle ( string title ) => (from movie in _movies
+                                                                  where String.Compare(movie.Title, title, true) == 0
+                                                                  select movie).FirstOrDefault();
+            // 1. Expression body   //=> _movies.FirstOrDefault(m => String.Compare(m?.Title, title, true) == 0);
+            // 2. Long way 
+        //{
+        //    foreach (var movie in _movies)
+        //    {
+        //        if (String.Compare(movie?.Title, title, true) == 0)
+        //            return movie;
+        //    };
 
-            return null;
-        }
+        //    return null;
+        //}
+
+        //private bool _@FAk2Fa235 ( Movie movie ) { return movie.Id == id; }
+
+        //Lambda syntax ::= parameters => body
+        // 0 parameters () => ?     Func<?>
+        // 1 parameter, 1 return type ::=   x => E   ,  _ => E         Func<T, ?>
+        // 2+ parameters (x,y) => ?                                    Func<S, T, ?>
+        // no return type => {}                                        Action<>
+        // Multiple statement expressions => { S* }
+        //      x => { Console.WriteLine(x); var y = x; return x; }
+        //
+        // General rules around lambdas
+        //   1. No ref or out parameters
+        //   2. Closure - any changes to captured values are lost
+        protected override Movie FindById ( int id ) => _movies.FirstOrDefault(m => m.Id == id);
+        //{
+        //    _movies.FirstOrDefault(m => m.Id == id);
+        //    //var temp = new DummyType() { Id = id };
+        //    //_movies.FirstOrDefault(temp._@Fak);
+
+        //    foreach (var movie in _movies)
+        //    {
+        //        if (movie.Id == id)
+        //            return movie;
+        //    };
+
+        //    return null;
+        //}
 
         //private readonly Movie[] _movies = new Movie[100];
+
         private readonly List<Movie> _movies = new List<Movie>();
         private int _id = 1;
     }

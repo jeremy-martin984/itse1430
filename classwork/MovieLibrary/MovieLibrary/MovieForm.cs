@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+
 using MovieLibrary.Business;
 
 namespace MovieLibrary.Winforms
@@ -25,7 +26,7 @@ namespace MovieLibrary.Winforms
         }
 
         public MovieForm ( string title, Movie movie ) : this()
-        {
+        {           
             Text = title;
             Movie = movie;
         }
@@ -54,21 +55,26 @@ namespace MovieLibrary.Winforms
         {
             if (!ValidateChildren())
                 return;
+
             // Validation and error reporting
             var movie = GetMovie();
-            var errors = ObjectValidator.Validate(movie);
+
+            //var validator = new ObjectValidator();            
+            //var errors = new ObjectValidator().Validate(movie);
+            var errors = ObjectValidator.TryValidate(movie);
             if (errors.Any())
+                //if (!movie.Validate(out var error))
             {
                 DisplayError("Error");
                 return;
-            }
+            };
 
             Movie = movie;
             DialogResult = DialogResult.OK;
             Close();
         }
         #endregion
-
+        
         protected override void OnLoad ( EventArgs e )
         {
             base.OnLoad(e);
@@ -94,15 +100,14 @@ namespace MovieLibrary.Winforms
 
         private Movie GetMovie ()
         {
-            var movie = new Movie {
+            var movie = new Movie();
 
-                //Null conditional
-                Title = txtTitle.Text?.Trim(),
-                RunLength = GetAsInt32(txtRunLength),
-                ReleaseYear = GetAsInt32(txtReleaseYear, 1900),
-                Description = txtDescription.Text.Trim(),
-                IsClassic = chkIsClassic.Checked
-            };
+            //Null conditional
+            movie.Title = txtTitle.Text?.Trim();
+            movie.RunLength = GetAsInt32(txtRunLength);
+            movie.ReleaseYear = GetAsInt32(txtReleaseYear, 1900);
+            movie.Description = txtDescription.Text.Trim();
+            movie.IsClassic = chkIsClassic.Checked;
 
             //movie.Genre = (Genre)ddlGenres.SelectedItem; //C-style, crashes if wrong
 
@@ -117,7 +122,7 @@ namespace MovieLibrary.Winforms
 
             //Pattern match
             if (ddlGenres.SelectedItem is Genre genre)
-                movie.Genre = genre;
+                movie.Genre = genre;            
 
             return movie;
         }
@@ -140,9 +145,9 @@ namespace MovieLibrary.Winforms
         {
             if (String.IsNullOrEmpty(control.Text))
                 return emptyValue;
-
+            
             if (Int32.TryParse(control.Text, out var result))
-                return result;
+                return result;            
 
             return -1;
         }
@@ -182,11 +187,6 @@ namespace MovieLibrary.Winforms
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");
-        }
-
-        private void MovieForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

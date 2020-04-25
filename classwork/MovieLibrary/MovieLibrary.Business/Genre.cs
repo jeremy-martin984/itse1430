@@ -8,7 +8,7 @@ namespace MovieLibrary.Business
 {
     public class Genre
     {
-        public Genre(string description)
+        public Genre ( string description )
         {
             Description = description ?? "";
         }
@@ -23,7 +23,7 @@ namespace MovieLibrary.Business
 
     public class Genres
     {
-        public static Genre[] GetAll()
+        public static Genre[] GetAll ()
         {
             var items = new Genre[5];
             items[0] = new Genre("Action");

@@ -1,16 +1,16 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Movie Library")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Nile.Windows")]
+[assembly: AssemblyDescription("ITSE 1430 - Spring 2020")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Your Name")]
-[assembly: AssemblyProduct("MovieLibrary")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("TCCD")]
+[assembly: AssemblyProduct("Nile")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Jeremy Martin")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e03e002f-8944-4ce3-a033-4194537af657")]
+[assembly: Guid("8f5366fa-58d9-4dd3-89c7-66975a72f676")]
 
 // Version information for an assembly consists of the following four values:
 //
