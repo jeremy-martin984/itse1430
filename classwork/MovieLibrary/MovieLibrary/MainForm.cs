@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;   //Language Integrated Natural Query
 using System.Windows.Forms;
-
+using System.Configuration;
 using MovieLibrary.Business;
 using MovieLibrary.Business.FileSystem;
 using MovieLibrary.Business.Memory;
 using MovieLibrary.Winforms;
+using MovieLibrary.Business.SqlServer;
 
 namespace MovieLibrary
 {
@@ -39,10 +40,16 @@ namespace MovieLibrary
         {
             base.OnLoad(e);
 
-            _movies = new FileMovieDatabase("movies.csv");
+
+
+
+            var connString = ConfigurationManager.ConnectionStrings["MovieDatabase"];
+
+            _movies = new SqlMovieDatabase(connString.ConnectionString);
 
             //Call extension method as though it is an instance - discover it
             //SeedDatabase.SeedIfEmpty(_movies);  //Compiles to this
+            /*
             try
             {
                 _movies.SeedIfEmpty();
@@ -56,7 +63,8 @@ namespace MovieLibrary
             {
                 DisplayError(ex.Message);
             };
-            
+            */
+
             UpdateUI();
         }
 
