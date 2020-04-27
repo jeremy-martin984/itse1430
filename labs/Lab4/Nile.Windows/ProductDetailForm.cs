@@ -1,5 +1,7 @@
-/*
+/*Jeremy Martin
  * ITSE 1430
+ * Lab 4
+ * 4/27/2020
  */
 using System;
 using System.ComponentModel;
@@ -69,7 +71,7 @@ namespace Nile.Windows
                 IsDiscontinued = _chkDiscontinued.Checked,
             };
 
-            //TODO: Validate product
+            ObjectValidator.Validate(product);
 
             Product = product;
             DialogResult = DialogResult.OK;

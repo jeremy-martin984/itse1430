@@ -1,5 +1,7 @@
-/*
+/*Jeremy Martin
  * ITSE 1430
+ * Lab 4
+ * 4/27/2020
  */
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,7 @@ namespace Nile.Stores
                 throw;
             }catch (Exception e)
             {
-                throw new InvalidOperationException("Error adding movie", e);
+                throw new InvalidOperationException("Error adding Product", e);
             };
             //Emulate database by storing copy
         }

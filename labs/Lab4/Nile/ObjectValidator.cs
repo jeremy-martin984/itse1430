@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿/*Jeremy Martin
+ * ITSE 1430
+ * Lab 4
+ * 4/27/2020
+ */
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nile

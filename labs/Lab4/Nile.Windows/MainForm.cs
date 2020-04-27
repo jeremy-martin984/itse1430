@@ -1,9 +1,13 @@
-/*
+/*Jeremy Martin
  * ITSE 1430
+ * Lab 4
+ * 4/27/2020
  */
 using System;
 using System.Windows.Forms;
 using System.Linq;
+using Nile.Stores.Sql;
+using System.Configuration;
 
 namespace Nile.Windows
 {
@@ -21,6 +25,9 @@ namespace Nile.Windows
         {
             base.OnLoad(e);
 
+            var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"];
+
+            _database = new SqlProductDatabase(connString.ConnectionString);
             _gridProducts.AutoGenerateColumns = false;
 
             UpdateList();
@@ -156,15 +163,19 @@ namespace Nile.Windows
         {
             try
             {
+
                 _bsProducts.DataSource = _database.GetAll();
             } catch (Exception e)
             {
                 DisplayError($"Product list failed to load: {e.Message}");
             }
 
+
         }
 
-        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        //private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+
+        private IProductDatabase _database;
         #endregion
 
         private void OnAbout ( object sender, EventArgs e )
