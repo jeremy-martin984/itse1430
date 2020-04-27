@@ -14,20 +14,34 @@ namespace Nile.Stores
         /// <returns>The added product.</returns>
         public Product Add ( Product product )
         {
-            //TODO: Check arguments
+            if (product == null)
+                throw new ArgumentNullException(nameof(product), "Product is null");
 
-            //TODO: Validate product
+            ObjectValidator.Validate(product);
 
+            try
+            {
+                var existing = Name(product.Name);
+                if (existing != null)
+                     throw new InvalidOperationException("Product must be unique");
+
+                return AddCore(product);
+            }catch(InvalidOperationException)
+            {
+                throw;
+            }catch (Exception e)
+            {
+                throw new InvalidOperationException("Error adding movie", e);
+            };
             //Emulate database by storing copy
-            return AddCore(product);
         }
 
         /// <summary>Get a specific product.</summary>
         /// <returns>The product, if it exists.</returns>
         public Product Get ( int id )
         {
-            //TODO: Check arguments
-
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than 0");
             return GetCore(id);
         }
         
@@ -42,8 +56,8 @@ namespace Nile.Stores
         /// <param name="id">The product to remove.</param>
         public void Remove ( int id )
         {
-            //TODO: Check arguments
-
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than 0");
             RemoveCore(id);
         }
         
@@ -52,19 +66,34 @@ namespace Nile.Stores
         /// <returns>The updated product.</returns>
         public Product Update ( Product product )
         {
-            //TODO: Check arguments
+            if (product == null)
+                throw new ArgumentNullException(nameof(product), "Product is null");
 
-            //TODO: Validate product
+            ObjectValidator.Validate(product);
 
-            //Get existing product
-            var existing = GetCore(product.Id);
+            try
+            {
+                var existing = Name(product.Name);
+                if (existing != null && existing.Id != product.Id)
+                    throw new InvalidOperationException("Product must be unique");
 
-            return UpdateCore(existing, product);
+                return UpdateCore(existing, product);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("Error adding movie", e);
+            };
         }
 
         #region Protected Members
 
         protected abstract Product GetCore( int id );
+
+        protected abstract Product Name(string name);
 
         protected abstract IEnumerable<Product> GetAllCore();
 

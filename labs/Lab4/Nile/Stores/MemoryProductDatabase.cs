@@ -3,6 +3,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nile.Stores
 {
@@ -33,6 +34,13 @@ namespace Nile.Stores
 
             return (product != null) ? CopyProduct(product) : null;
         }
+
+        /// <summary>Get a product by name</summary>
+        /// <returns> The product, if it exists</returns>
+
+        protected override Product Name(string name) => (from product in _products
+                                                         where String.Compare(product.Name, name, true) == 0
+                                                         select product).FirstOrDefault();
 
         /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>

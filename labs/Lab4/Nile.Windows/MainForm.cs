@@ -36,16 +36,21 @@ namespace Nile.Windows
         private void OnProductAdd( object sender, EventArgs e )
         {
             var child = new ProductDetailForm("Product Details");
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
 
-            var errors = ObjectValidator.TryValidate(child.Product);
-            if (errors.Any())
-                return;
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
 
-            //Save product
-            _database.Add(child.Product);
-            UpdateList();
+                try
+                {
+                ObjectValidator.Validate(child.Product);
+
+                    //Save product
+                    _database.Add(child.Product);
+                    UpdateList();
+                }catch (Exception ex)
+                {
+                    DisplayError(ex.Message);
+                }
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -53,18 +58,27 @@ namespace Nile.Windows
             var product = GetSelectedProduct();
             if (product == null)
             {
-                MessageBox.Show("No products available.");
+                DisplayError("No products available.");
                 return;
             };
-
-            EditProduct(product);
+            try
+            {
+                ObjectValidator.Validate(product);
+                EditProduct(product);
+            }catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+            }
         }        
 
         private void OnProductDelete( object sender, EventArgs e )
         {
             var product = GetSelectedProduct();
             if (product == null)
+            {
+                DisplayError("No products available.");
                 return;
+            }
 
             DeleteProduct(product);
         }        
@@ -108,11 +122,8 @@ namespace Nile.Windows
                                 "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
-
-            var errors = ObjectValidator.TryValidate(child.Product);
-            if (errors.Any())
-                return;
-            //TODO: Handle errors
+            if (product.Id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(product.Id), "Invalid product ID");
 
             //Delete product
             _database.Remove(product.Id);
@@ -127,12 +138,8 @@ namespace Nile.Windows
                 return;
 
 
-            var errors = ObjectValidator.TryValidate(child.Product);
-            if (errors.Any())
-                return;
+            ObjectValidator.Validate(product);
 
-            //TODO: Handle errors
-            //Save product
             _database.Update(child.Product);
             UpdateList();
         }
@@ -147,10 +154,14 @@ namespace Nile.Windows
 
         private void UpdateList ()
         {
-            //TODO: Handle errors
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll();
+            } catch (Exception e)
+            {
+                DisplayError($"Product list failed to load: {e.Message}");
+            }
 
-
-            _bsProducts.DataSource = _database.GetAll();
         }
 
         private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
@@ -160,6 +171,11 @@ namespace Nile.Windows
         {
             var about = new About();
             about.Show(this);
+        }
+
+        private void DisplayError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
