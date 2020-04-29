@@ -87,7 +87,7 @@ namespace Nile.Stores
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException("Error adding movie", e);
+                throw new InvalidOperationException("Error adding product", e);
             };
         }
 
